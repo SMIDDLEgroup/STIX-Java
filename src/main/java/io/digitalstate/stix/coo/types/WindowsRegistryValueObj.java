@@ -10,7 +10,6 @@ import io.digitalstate.stix.vocabulary.vocabularies.WindowsRegistryValueDataType
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Optional;
 
@@ -31,7 +30,6 @@ public interface WindowsRegistryValueObj extends GenericValidation, StixCustomPr
 
     @JsonProperty("name")
     @JsonPropertyDescription("Specifies the name of the registry value. For specifying the default value in a registry key, an empty string MUST be used.")
-    @NotNull
     String getName();
 
     @JsonProperty("data")

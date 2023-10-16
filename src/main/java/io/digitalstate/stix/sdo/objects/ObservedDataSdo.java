@@ -10,8 +10,6 @@ import io.digitalstate.stix.common.StixInstant;
 import io.digitalstate.stix.coo.CyberObservableObject;
 import io.digitalstate.stix.coo.json.observables.CyberObservableSetFieldDeserializer;
 import io.digitalstate.stix.coo.json.observables.CyberObservableSetFieldSerializer;
-import io.digitalstate.stix.json.StixInstantDeserializer;
-import io.digitalstate.stix.json.StixInstantSerializer;
 import io.digitalstate.stix.redaction.Redactable;
 import io.digitalstate.stix.sdo.DomainObject;
 import io.digitalstate.stix.validation.contraints.defaulttypevalue.DefaultTypeValue;
@@ -20,10 +18,6 @@ import org.hibernate.validator.constraints.Range;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
-import java.time.Instant;
 import java.util.Set;
 /**
  * observed-data
@@ -43,26 +37,22 @@ import java.util.Set;
 @Redactable
 public interface ObservedDataSdo extends DomainObject {
 
-    @NotNull
     @JsonProperty("first_observed")
     @JsonPropertyDescription("The beginning of the time window that the data was observed during.")
     @Redactable(useMask = true)
     StixInstant getFirstObserved();
 
-    @NotNull
     @JsonProperty("last_observed")
     @JsonPropertyDescription("The end of the time window that the data was observed during.")
     @Redactable(useMask = true)
     StixInstant getLastObserved();
 
-    @NotNull @Positive
     @JsonProperty("number_observed")
     @JsonPropertyDescription("The number of times the data represented in the objects property was observed. This MUST be an integer between 1 and 999,999,999 inclusive.")
     @Redactable(useMask = true)
     @Range(min = 1, max = 999999999)
     Integer getNumberObserved();
 
-    @NotNull @Size(min = 1, message = "At least one Cyber Observable Reference must be provided")
     @JsonProperty("objects")
     @JsonPropertyDescription("A dictionary of Cyber Observable Objects that describes the single 'fact' that was observed.")
     @Redactable(useMask = true)

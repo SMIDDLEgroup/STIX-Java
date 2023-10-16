@@ -12,7 +12,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,7 +39,6 @@ public interface PdfFileExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("is_optimized")
     @JsonPropertyDescription("Specifies whether the PDF file has been optimized.")
-    @NotNull
     Optional<Boolean> isOptimized();
 
     @JsonProperty("document_info_dict")

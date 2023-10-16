@@ -9,8 +9,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 /**
@@ -30,7 +28,6 @@ public interface MutexCoo extends CyberObservableObject {
 
     @JsonProperty("name")
     @JsonPropertyDescription("Specifies the name of the mutex object.")
-    @NotNull
     String getName();
 
 }

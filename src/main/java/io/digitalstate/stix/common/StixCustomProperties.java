@@ -3,8 +3,6 @@ package io.digitalstate.stix.common;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.digitalstate.stix.validation.contraints.startswith.StartsWith;
-import org.hibernate.validator.constraints.Length;
 
 import java.util.Map;
 
@@ -21,6 +19,6 @@ public interface StixCustomProperties {
      */
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonUnwrapped @JsonAnyGetter
-    Map<@StartsWith() @Length(min = 3, max = 250, message = "STIX Custom Properties must have a min key length of 3 and max of 250") String, Object> getCustomProperties();
+    Map<String, Object> getCustomProperties();
 
 }

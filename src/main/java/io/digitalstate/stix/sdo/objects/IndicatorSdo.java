@@ -44,7 +44,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 public interface IndicatorSdo extends DomainObject {
 
     @Override
-    @NotNull @Size(min = 1)
     @Vocab(IndicatorLabels.class)
     @JsonPropertyDescription("This field is an Open Vocabulary that specifies the type of indicator. Open vocab - indicator-label-ov")
     @Redactable(useMask = true)
@@ -60,13 +59,11 @@ public interface IndicatorSdo extends DomainObject {
     @Redactable
     Optional<String> getDescription();
 
-    @NotBlank
     @JsonProperty("pattern")
     @JsonPropertyDescription("The detection pattern for this indicator. The default language is STIX Patterning.")
     @Redactable(useMask = true)
     String getPattern();
 
-    @NotNull
     @JsonProperty("valid_from")
     @JsonPropertyDescription("The time from which this indicator should be considered valuable intelligence.")
     @Redactable(useMask = true)
@@ -77,7 +74,6 @@ public interface IndicatorSdo extends DomainObject {
     @Redactable
     Optional<StixInstant> getValidUntil();
 
-    @NotNull
     @JsonProperty("kill_chain_phases") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The list of kill chain phases for which this attack pattern is used.")
     @Redactable

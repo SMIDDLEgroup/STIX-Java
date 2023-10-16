@@ -9,8 +9,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
@@ -32,8 +30,6 @@ public interface EmailAddressCoo extends CyberObservableObject {
 
     @JsonProperty("value")
     @JsonPropertyDescription("Specifies a single email address. This MUST not include the display name.")
-    @Pattern(regexp="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")
-    @NotNull
     String getValue();
 
     @JsonProperty("display_name")

@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -15,7 +19,6 @@ import org.hibernate.validator.constraints.Length;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 

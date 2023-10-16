@@ -15,8 +15,6 @@ import io.digitalstate.stix.vocabulary.vocabularies.NetworkSocketTypes;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,18 +40,15 @@ public interface NetworkSocketExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("address_family")
     @JsonPropertyDescription("Specifies the address family (AF_*) that the socket is configured for.")
-    @NotNull
     @Vocab(NetworkSocketAddressFamilies.class)
     String getAddressFamily();
 
     @JsonProperty("is_blocking")
     @JsonPropertyDescription("Specifies whether the socket is in blocking mode.")
-    @NotNull
     Optional<Boolean> getBlocking();
 
     @JsonProperty("is_listening")
     @JsonPropertyDescription("Specifies whether the socket is in listening mode.")
-    @NotNull
     Optional<Boolean> getListening();
 
     @JsonProperty("protocol_family")
@@ -71,7 +66,7 @@ public interface NetworkSocketExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("socket_descriptor")
     @JsonPropertyDescription("Specifies the socket file descriptor value associated with the socket, as a non-negative integer.")
-    Optional<@PositiveOrZero Long> getSocketDescriptor();
+    Optional<Long> getSocketDescriptor();
 
     @JsonProperty("socket_handle")
     @JsonPropertyDescription("Specifies the handle or inode value associated with the socket.")

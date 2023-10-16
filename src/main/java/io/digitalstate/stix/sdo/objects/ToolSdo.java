@@ -14,8 +14,6 @@ import org.hibernate.validator.constraints.Length;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,13 +40,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 public interface ToolSdo extends DomainObject {
 
     @Override
-    @NotNull
     @Vocab(ToolLabels.class)
     @JsonPropertyDescription("The kind(s) of tool(s) being described. Open Vocab - tool-label-ov")
     @Redactable(useMask = true)
     Set<@Length(min = 1) String> getLabels();
 
-    @NotBlank
     @JsonProperty("name")
     @JsonPropertyDescription("The name used to identify the Tool.")
     @Redactable(useMask = true)
@@ -59,7 +55,6 @@ public interface ToolSdo extends DomainObject {
     @Redactable
     Optional<String> getDescription();
 
-    @NotNull
     @JsonProperty("kill_chain_phases") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The list of kill chain phases for which this Tool instance can be used.")
     @Redactable

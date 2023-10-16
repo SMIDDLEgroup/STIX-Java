@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.digitalstate.stix.bundle.BundleableObject;
 import io.digitalstate.stix.custom.StixCustomObject;
-import io.digitalstate.stix.validation.contraints.defaulttypevalue.DefaultTypeValue;
-import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 

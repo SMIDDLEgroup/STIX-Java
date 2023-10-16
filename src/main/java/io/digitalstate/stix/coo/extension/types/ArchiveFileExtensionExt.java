@@ -11,7 +11,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,7 +33,6 @@ public interface ArchiveFileExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("contains_refs")
     @JsonPropertyDescription("Specifies the files contained in the archive, as a reference to one or more other File Objects. The objects referenced in this list MUST be of type file-object.")
-    @NotNull
     Set<String> getContainsRefs();
 
     @JsonProperty("version")

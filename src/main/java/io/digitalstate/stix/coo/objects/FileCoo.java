@@ -16,10 +16,6 @@ import org.hibernate.validator.constraints.Length;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
-import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -49,7 +45,7 @@ public interface FileCoo extends CyberObservableObject {
 
     @JsonProperty("size")
     @JsonPropertyDescription("Specifies the size of the file, in bytes, as a non-negative integer.")
-    Optional<@Positive Long> getSize();
+    Optional<Long> getSize();
 
     @JsonProperty("name")
     @JsonPropertyDescription("Specifies the name of the file.")
@@ -57,19 +53,16 @@ public interface FileCoo extends CyberObservableObject {
 
     @JsonProperty("name_enc")
     @JsonPropertyDescription("Specifies the observed encoding for the name of the file.")
-    Optional<@Pattern(regexp = "^[a-zA-Z0-9/\\.+_:-]{2,250}$")
-            String> getNameEnc();
+    Optional<String> getNameEnc();
 
     @JsonProperty("magic_number_hex")
     @JsonPropertyDescription("Specifies the hexadecimal constant ('magic number') associated with a specific file format that corresponds to the file, if applicable.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$")
-            String> getMagicNumberHex();
+    Optional<String> getMagicNumberHex();
 
     //@TODO Convert this to a Vocab Validation
     @JsonProperty("mime_type")
     @JsonPropertyDescription("Specifies the MIME type name specified for the file, e.g., 'application/msword'.")
-    Optional<@Pattern(regexp = "^(application|audio|font|image|message|model|multipart|text|video)/[a-zA-Z0-9.+_-]+")
-            String> getMimeType();
+    Optional<String> getMimeType();
 
     @JsonProperty("created")
     @JsonPropertyDescription("Specifies the date/time the file was created.")
@@ -89,7 +82,6 @@ public interface FileCoo extends CyberObservableObject {
 
     @JsonProperty("is_encrypted")
     @JsonPropertyDescription("Specifies whether the file is encrypted.")
-    @NotNull
     Optional<Boolean> isEncrypted();
 
     @JsonProperty("encryption_algorithm")

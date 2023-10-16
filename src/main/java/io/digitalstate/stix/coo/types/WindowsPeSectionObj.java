@@ -11,8 +11,6 @@ import org.hibernate.validator.constraints.Length;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
@@ -37,12 +35,11 @@ public interface WindowsPeSectionObj extends GenericValidation, StixCustomProper
 
     @JsonProperty("name")
     @JsonPropertyDescription("Specifies the name of the section.")
-    @NotNull
     Optional<String> getName();
 
     @JsonProperty("size")
     @JsonPropertyDescription("Specifies the size of the section, in bytes.")
-    Optional<@PositiveOrZero Long> getSize();
+    Optional<Long> getSize();
 
     @JsonProperty("entropy")
     @JsonPropertyDescription("Specifies the calculated entropy for the section, as calculated using the Shannon algorithm.")

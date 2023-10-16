@@ -10,8 +10,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.Pattern;
-import java.time.Instant;
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,8 +39,7 @@ public interface DirectoryCoo extends CyberObservableObject {
      */
     @JsonProperty("path_enc")
     @JsonPropertyDescription("Specifies the observed encoding for the path.")
-    Optional<@Pattern(regexp = "^[a-zA-Z0-9/\\.+_:-]{2,250}$")
-            String> getPathEnc();
+    Optional<String> getPathEnc();
 
     @JsonProperty("created")
     @JsonPropertyDescription("Specifies the date/time the directory was created.")

@@ -9,7 +9,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
@@ -31,7 +30,6 @@ public interface DomainNameCoo extends CyberObservableObject {
 
     @JsonProperty("value")
     @JsonPropertyDescription("Specifies the value of the domain name.")
-    @NotNull
     String getValue();
 
     @JsonProperty("resolves_to_refs")

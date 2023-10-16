@@ -11,7 +11,6 @@ import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;

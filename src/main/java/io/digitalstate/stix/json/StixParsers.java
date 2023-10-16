@@ -1,7 +1,6 @@
 package io.digitalstate.stix.json;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
@@ -14,13 +13,51 @@ import io.digitalstate.stix.bundle.BundleableObject;
 import io.digitalstate.stix.common.Stix;
 import io.digitalstate.stix.common.StixBoolean;
 import io.digitalstate.stix.common.StixInstant;
-import io.digitalstate.stix.coo.extension.types.*;
-import io.digitalstate.stix.coo.objects.*;
+import io.digitalstate.stix.coo.extension.types.ArchiveFileExtension;
+import io.digitalstate.stix.coo.extension.types.HttpRequestExtension;
+import io.digitalstate.stix.coo.extension.types.IcmpExtension;
+import io.digitalstate.stix.coo.extension.types.NetworkSocketExtension;
+import io.digitalstate.stix.coo.extension.types.NtfsFileExtenstion;
+import io.digitalstate.stix.coo.extension.types.PdfFileExtension;
+import io.digitalstate.stix.coo.extension.types.RasterImageFileExtension;
+import io.digitalstate.stix.coo.extension.types.TcpExtension;
+import io.digitalstate.stix.coo.extension.types.UnixAccountExtension;
+import io.digitalstate.stix.coo.extension.types.WindowsPeBinaryFileExtension;
+import io.digitalstate.stix.coo.extension.types.WindowsProcessExtension;
+import io.digitalstate.stix.coo.extension.types.WindowsServiceExtension;
+import io.digitalstate.stix.coo.objects.Artifact;
+import io.digitalstate.stix.coo.objects.AutonomousSystem;
+import io.digitalstate.stix.coo.objects.Directory;
+import io.digitalstate.stix.coo.objects.DomainName;
+import io.digitalstate.stix.coo.objects.EmailAddress;
+import io.digitalstate.stix.coo.objects.EmailMessage;
+import io.digitalstate.stix.coo.objects.File;
+import io.digitalstate.stix.coo.objects.Ipv4Address;
+import io.digitalstate.stix.coo.objects.Ipv6Address;
+import io.digitalstate.stix.coo.objects.MacAddress;
+import io.digitalstate.stix.coo.objects.Mutex;
+import io.digitalstate.stix.coo.objects.NetworkTraffic;
 import io.digitalstate.stix.coo.objects.Process;
+import io.digitalstate.stix.coo.objects.Software;
+import io.digitalstate.stix.coo.objects.Url;
+import io.digitalstate.stix.coo.objects.UserAccount;
+import io.digitalstate.stix.coo.objects.WindowsRegistryKey;
+import io.digitalstate.stix.coo.objects.X509Certificate;
 import io.digitalstate.stix.datamarkings.MarkingDefinition;
 import io.digitalstate.stix.datamarkings.objects.Statement;
 import io.digitalstate.stix.datamarkings.objects.Tlp;
-import io.digitalstate.stix.sdo.objects.*;
+import io.digitalstate.stix.sdo.objects.AttackPattern;
+import io.digitalstate.stix.sdo.objects.Campaign;
+import io.digitalstate.stix.sdo.objects.CourseOfAction;
+import io.digitalstate.stix.sdo.objects.Identity;
+import io.digitalstate.stix.sdo.objects.Indicator;
+import io.digitalstate.stix.sdo.objects.IntrusionSet;
+import io.digitalstate.stix.sdo.objects.Malware;
+import io.digitalstate.stix.sdo.objects.ObservedData;
+import io.digitalstate.stix.sdo.objects.Report;
+import io.digitalstate.stix.sdo.objects.ThreatActor;
+import io.digitalstate.stix.sdo.objects.Tool;
+import io.digitalstate.stix.sdo.objects.Vulnerability;
 import io.digitalstate.stix.sro.objects.Relationship;
 import io.digitalstate.stix.sro.objects.Sighting;
 
@@ -33,6 +70,10 @@ import java.io.IOException;
 public class StixParsers {
 
     private static ObjectMapper jsonMapper = new ObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)
+            .configure(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS, false)
+            .configure(DeserializationFeature.FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY, false)
             .registerModule(new ParameterNamesModule())
             .registerModule(new Jdk8Module())
             .registerModule(new JavaTimeModule())

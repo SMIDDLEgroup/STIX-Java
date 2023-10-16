@@ -11,8 +11,6 @@ import org.hibernate.validator.constraints.Length;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
@@ -34,7 +32,6 @@ public interface NtfsAlternateDataStreamObj extends GenericValidation, StixCusto
 
     @JsonProperty("name")
     @JsonPropertyDescription("Specifies the name of the alternate data stream.")
-    @NotNull
     String getName();
 
     @JsonProperty("hashes")
@@ -43,6 +40,6 @@ public interface NtfsAlternateDataStreamObj extends GenericValidation, StixCusto
 
     @JsonProperty("size")
     @JsonPropertyDescription("Specifies the size of the alternate data stream, in bytes, as a non-negative integer.")
-    Optional<@PositiveOrZero Long> getSize();
+    Optional<Long> getSize();
 
 }

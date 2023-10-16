@@ -12,8 +12,6 @@ import org.hibernate.validator.constraints.Length;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
@@ -45,7 +43,7 @@ public interface WindowsPeOptionalHeaderObj extends GenericValidation, StixCusto
 
     @JsonProperty("magic_hex")
     @JsonPropertyDescription("Specifies the unsigned Optional<Integer> that indicates the type of the PE binary.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getMagicHex();
+    Optional<String> getMagicHex();
 
     @JsonProperty("major_linker_version")
     @JsonPropertyDescription("Specifies the linker major version number.")
@@ -57,15 +55,15 @@ public interface WindowsPeOptionalHeaderObj extends GenericValidation, StixCusto
 
     @JsonProperty("size_of_code")
     @JsonPropertyDescription("Specifies the size of the code (text) section. If there are multiple such sections, this refers to the sum of the sizes of each section.")
-    Optional<@PositiveOrZero Long> getSizeOfCode();
+    Optional<Long> getSizeOfCode();
 
     @JsonProperty("size_of_initialized_data")
     @JsonPropertyDescription("Specifies the size of the initialized data section. If there are multiple such sections, this refers to the sum of the sizes of each section.")
-    Optional<@PositiveOrZero Long> getSizeOfInitializedData();
+    Optional<Long> getSizeOfInitializedData();
 
     @JsonProperty("size_of_uninitialized_data")
     @JsonPropertyDescription("Specifies the size of the uninitialized data section. If there are multiple such sections, this refers to the sum of the sizes of each section.")
-    Optional<@PositiveOrZero Long> getSizeOfUninitializedData();
+    Optional<Long> getSizeOfUninitializedData();
 
     @JsonProperty("address_of_entry_point")
     @JsonPropertyDescription("Specifies the address of the entry point relative to the image base when the executable is loaded into memory.")
@@ -117,47 +115,47 @@ public interface WindowsPeOptionalHeaderObj extends GenericValidation, StixCusto
 
     @JsonProperty("win32_version_value_hex")
     @JsonPropertyDescription("Specifies the reserved win32 version value.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getWin32VersionValueHex();
+    Optional<String> getWin32VersionValueHex();
 
     @JsonProperty("size_of_image")
     @JsonPropertyDescription("Specifies the size, in bytes, of the image, including all headers, as the image is loaded in memory.")
-    Optional<@PositiveOrZero Long> getSizeOfImage();
+    Optional<Long> getSizeOfImage();
 
     @JsonProperty("size_of_headers")
     @JsonPropertyDescription("Specifies the combined size of the MS-DOS, PE header, and section headers, rounded up a multiple of the value specified in the file_alignment header.")
-    Optional<@PositiveOrZero Long> getSizeOfHeaders();
+    Optional<Long> getSizeOfHeaders();
 
     @JsonProperty("checksum_hex")
     @JsonPropertyDescription("Specifies the checksum of the PE binary.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getChecksumHex();
+    Optional<String> getChecksumHex();
 
     @JsonProperty("subsystem_hex")
     @JsonPropertyDescription("Specifies the subsystem (e.g., GUI, device driver, etc.) that is required to run this image.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getSubsystemHex();
+    Optional<String> getSubsystemHex();
 
     @JsonProperty("dll_characteristics_hex")
     @JsonPropertyDescription("Specifies the flags that characterize the PE binary.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getDllCharacteristicsHex();
+    Optional<String> getDllCharacteristicsHex();
 
     @JsonProperty("size_of_stack_reserve")
     @JsonPropertyDescription("Specifies the size of the stack to reserve")
-    Optional<@PositiveOrZero Long> getSizeOfStackReserve();
+    Optional<Long> getSizeOfStackReserve();
 
     @JsonProperty("size_of_stack_commit")
     @JsonPropertyDescription("Specifies the size of the stack to commit.")
-    Optional<@PositiveOrZero Long> getSizeOfStackCommit();
+    Optional<Long> getSizeOfStackCommit();
 
     @JsonProperty("size_of_heap_reserve")
     @JsonPropertyDescription("Specifies the size of the local heap space to reserve.")
-    Optional<@PositiveOrZero Long> getSizeOfHeapReserve();
+    Optional<Long> getSizeOfHeapReserve();
 
     @JsonProperty("size_of_heap_commit")
     @JsonPropertyDescription("Specifies the size of the local heap space to commit.")
-    Optional<@PositiveOrZero Long> getSizeOfHeapCommit();
+    Optional<Long> getSizeOfHeapCommit();
 
     @JsonProperty("loader_flags_hex")
     @JsonPropertyDescription("Specifies the reserved loader flags.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getLoaderFlagsHex();
+    Optional<String> getLoaderFlagsHex();
 
     @JsonProperty("number_of_rva_and_sizes")
     @JsonPropertyDescription("Specifies the number of data-directory entries in the remainder of the optional header.")

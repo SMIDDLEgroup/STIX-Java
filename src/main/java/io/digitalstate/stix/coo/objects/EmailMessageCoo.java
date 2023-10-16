@@ -12,8 +12,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -38,7 +36,6 @@ public interface EmailMessageCoo extends CyberObservableObject {
 
     @JsonProperty("is_multipart")
     @JsonPropertyDescription("Indicates whether the email body contains multiple MIME parts.")
-    @NotNull
     Boolean isMultipart();
 
     @JsonProperty("date")

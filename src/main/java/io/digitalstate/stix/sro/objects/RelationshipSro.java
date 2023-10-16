@@ -1,12 +1,28 @@
 package io.digitalstate.stix.sro.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.json.converters.dehydrated.DomainObjectConverter;
 import io.digitalstate.stix.redaction.Redactable;
 import io.digitalstate.stix.sdo.DomainObject;
-import io.digitalstate.stix.sdo.objects.*;
+import io.digitalstate.stix.sdo.objects.AttackPatternSdo;
+import io.digitalstate.stix.sdo.objects.CampaignSdo;
+import io.digitalstate.stix.sdo.objects.CourseOfActionSdo;
+import io.digitalstate.stix.sdo.objects.IdentitySdo;
+import io.digitalstate.stix.sdo.objects.IndicatorSdo;
+import io.digitalstate.stix.sdo.objects.IntrusionSetSdo;
+import io.digitalstate.stix.sdo.objects.MalwareSdo;
+import io.digitalstate.stix.sdo.objects.ThreatActorSdo;
+import io.digitalstate.stix.sdo.objects.ToolSdo;
+import io.digitalstate.stix.sdo.objects.VulnerabilitySdo;
 import io.digitalstate.stix.sro.RelationshipObject;
 import io.digitalstate.stix.validation.contraints.defaulttypevalue.DefaultTypeValue;
 import io.digitalstate.stix.validation.contraints.relationship.RelationshipLimit;
@@ -17,8 +33,6 @@ import io.digitalstate.stix.vocabulary.vocabularies.RelationshipTypes;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
@@ -27,13 +41,14 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * relationship
  * <p>
  * The Relationship object is used to link together two SDOs in order to describe how they are related to each other.
- * 
  */
-@Value.Immutable @Serial.Version(1L)
-@Value.Style(typeAbstract="*Sro", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@Value.Immutable
+@Serial.Version(1L)
+@Value.Style(typeAbstract = "*Sro", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
 @DefaultTypeValue(value = "relationship", groups = {DefaultValuesProcessor.class})
 @JsonTypeName("relationship")
-@JsonSerialize(as = Relationship.class) @JsonDeserialize(builder = Relationship.Builder.class)
+@JsonSerialize(as = Relationship.class)
+@JsonDeserialize(builder = Relationship.Builder.class)
 @JsonPropertyOrder({"type", "id", "created_by_ref", "created",
         "modified", "revoked", "labels", "external_references",
         "object_marking_refs", "granular_markings", "relationship_type", "description",
@@ -72,32 +87,30 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 @RelationshipLimit(source = ToolSdo.class, relationshipType = "targets", target = {IdentitySdo.class, VulnerabilitySdo.class})
 public interface RelationshipSro extends RelationshipObject {
 
-    @NotBlank
     @Vocab(RelationshipTypes.class)
     @JsonProperty("relationship_type")
-	@JsonPropertyDescription("The name used to identify the type of relationship.")
+    @JsonPropertyDescription("The name used to identify the type of relationship.")
     @Redactable(useMask = true)
     String getRelationshipType();
 
-    @JsonProperty("description") @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-	@JsonPropertyDescription("A description that helps provide context about the relationship.")
+    @JsonProperty("description")
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+    @JsonPropertyDescription("A description that helps provide context about the relationship.")
     @Redactable
     Optional<String> getDescription();
 
-    @NotNull
     @JsonProperty("source_ref")
-	@JsonPropertyDescription("The ID of the source (from) object.")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonPropertyDescription("The ID of the source (from) object.")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonDeserialize(converter = DomainObjectConverter.class)
     @Redactable(useMask = true)
     DomainObject getSourceRef();
 
-    @NotNull
     @JsonProperty("target_ref")
-	@JsonPropertyDescription("The ID of the target (to) object.")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonPropertyDescription("The ID of the target (to) object.")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonDeserialize(converter = DomainObjectConverter.class)
     @Redactable(useMask = true)
     DomainObject getTargetRef();

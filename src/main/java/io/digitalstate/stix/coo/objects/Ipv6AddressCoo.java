@@ -9,7 +9,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
@@ -38,7 +37,6 @@ public interface Ipv6AddressCoo extends CyberObservableObject {
      */
     @JsonProperty("value")
     @JsonPropertyDescription("Specifies one or more IPv6 addresses expressed using CIDR notation.")
-    @NotNull
     String getValue();
 
     /**

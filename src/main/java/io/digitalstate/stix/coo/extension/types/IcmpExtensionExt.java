@@ -11,9 +11,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 /**
@@ -35,14 +32,10 @@ public interface IcmpExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("icmp_type_hex")
     @JsonPropertyDescription("Specifies the ICMP type byte.")
-    @Pattern(regexp = "^([a-fA-F0-9]{2})+$")
-    @NotNull
     String getOcmpTypeHex();
 
     @JsonProperty("icmp_code_hex")
     @JsonPropertyDescription("Specifies the ICMP code byte.")
-    @Pattern(regexp = "^([a-fA-F0-9]{2})+$")
-    @NotNull
     String getIcmpCodeHex();
 
 }

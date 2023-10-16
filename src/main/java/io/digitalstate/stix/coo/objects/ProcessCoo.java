@@ -11,8 +11,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -41,7 +39,6 @@ public interface ProcessCoo extends CyberObservableObject {
 
     @JsonProperty("is_hidden")
     @JsonPropertyDescription("Specifies whether the process is hidden.")
-    @NotNull
     Optional<Boolean> isHidden();
 
     @JsonProperty("pid")

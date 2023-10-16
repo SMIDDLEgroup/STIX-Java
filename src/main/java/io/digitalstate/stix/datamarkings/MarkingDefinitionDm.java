@@ -17,9 +17,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 /**
  * <p>Builder Required Fields:</p>
  * <ol>
@@ -40,11 +37,9 @@ import javax.validation.constraints.NotNull;
 @Redactable
 public interface MarkingDefinitionDm extends StixCommonProperties, StixCustomProperties {
 
-    @NotBlank
     @JsonProperty("definition_type")
     String getDefinitionType();
 
-    @NotNull
     @JsonProperty("definition")
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "definition_type", include = JsonTypeInfo.As.EXTERNAL_PROPERTY)
     StixMarkingObject getDefinition();

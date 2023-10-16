@@ -4,7 +4,6 @@ import io.digitalstate.stix.coo.extension.CyberObservableExtension;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.reflect.Field;
 
 /**
  * This is used on any class that implements <strong>CyberObservableObject</strong>.
@@ -19,40 +18,7 @@ public class StixDefaultTypeValueCyberObservableExtensionValidator implements Co
     }
 
     @Override
-    public boolean isValid(CyberObservableExtension cyberObservableExtension,
-                           ConstraintValidatorContext cxt) {
-
-        String type = cyberObservableExtension.getType();
-        if (type == null || type.isEmpty()){
-            try {
-                Field typeField = cyberObservableExtension.getClass().getDeclaredField("type");
-                typeField.setAccessible(true);
-                typeField.set(cyberObservableExtension, defaultTypeValue);
-            } catch (NoSuchFieldException e) {
-                cxt.disableDefaultConstraintViolation();
-                String violationMessage = "Cant find Field: 'type' for: " + cyberObservableExtension.getClass();
-                cxt.buildConstraintViolationWithTemplate(violationMessage).addConstraintViolation();
-                e.printStackTrace();
-                return false;
-
-            } catch (IllegalAccessException e) {
-                cxt.disableDefaultConstraintViolation();
-                String violationMessage = "Illegal Access Exception for: 'type' for: " + cyberObservableExtension.getClass();
-                cxt.buildConstraintViolationWithTemplate(violationMessage).addConstraintViolation();
-                e.printStackTrace();
-                return false;
-            }
-        } else {
-            if (cyberObservableExtension.getType().equals(defaultTypeValue)){
-                return true;
-            } else{
-                cxt.disableDefaultConstraintViolation();
-                String violationMessage = "Field 'type' must have value of " + defaultTypeValue + "for class " + cyberObservableExtension.getClass().getCanonicalName();
-                cxt.buildConstraintViolationWithTemplate(violationMessage).addConstraintViolation();
-                return false;
-            }
-        }
-
+    public boolean isValid(CyberObservableExtension cyberObservableExtension, ConstraintValidatorContext cxt) {
         return true;
     }
 }

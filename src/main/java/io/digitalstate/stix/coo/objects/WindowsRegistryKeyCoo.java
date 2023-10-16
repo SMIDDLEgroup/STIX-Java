@@ -11,9 +11,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.time.Instant;
 import java.util.Optional;
 import java.util.Set;
 
@@ -36,8 +33,6 @@ public interface WindowsRegistryKeyCoo extends CyberObservableObject {
 
     @JsonProperty("key")
     @JsonPropertyDescription("Specifies the full registry key including the hive.")
-    @Pattern(regexp = "^HKEY_LOCAL_MACHINE|hkey_local_machine|HKEY_CURRENT_USER|hkey_current_user|HKEY_CLASSES_ROOT|hkey_classes_root|HKEY_CURRENT_CONFIG|hkey_current_config|HKEY_PERFORMANCE_DATA|hkey_performance_data|HKEY_USERS|hkey_users|HKEY_DYN_DATA")
-    @NotNull
     String getKey();
 
     @JsonProperty("values")

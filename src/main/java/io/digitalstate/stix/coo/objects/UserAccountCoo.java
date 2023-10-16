@@ -12,8 +12,6 @@ import io.digitalstate.stix.vocabulary.vocabularies.AccountTypes;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import java.time.Instant;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
@@ -39,7 +37,6 @@ public interface UserAccountCoo extends CyberObservableObject {
 
     @JsonProperty("user_id")
     @JsonPropertyDescription("Specifies the identifier of the account.")
-    @NotNull
     String getUserId();
 
     @JsonProperty("account_login")
@@ -56,22 +53,18 @@ public interface UserAccountCoo extends CyberObservableObject {
 
     @JsonProperty("is_service_account")
     @JsonPropertyDescription("Indicates that the account is associated with a network service or system process (daemon), not a specific individual.")
-    @NotNull
     Optional<Boolean> isServiceAccount();
 
     @JsonProperty("is_privileged")
     @JsonPropertyDescription("Specifies that the account has elevated privileges (i.e., in the case of root on Unix or the Windows Administrator account).")
-    @NotNull
     Optional<Boolean> isPrivileged();
 
     @JsonProperty("can_escalate_privs")
     @JsonPropertyDescription("Specifies that the account has the ability to escalate privileges (i.e., in the case of sudo on Unix or a Windows Domain Admin account).")
-    @NotNull
     Optional<Boolean> isCanEscalatePrivs();
 
     @JsonProperty("is_disabled")
     @JsonPropertyDescription("Specifies if the account is disabled.")
-    @NotNull
     Optional<Boolean> isDisabled();
 
     @JsonProperty("account_created")

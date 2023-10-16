@@ -1,6 +1,10 @@
 package io.digitalstate.stix.sdo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.redaction.Redactable;
@@ -8,13 +12,14 @@ import io.digitalstate.stix.sdo.DomainObject;
 import io.digitalstate.stix.validation.contraints.defaulttypevalue.DefaultTypeValue;
 import io.digitalstate.stix.validation.contraints.vocab.Vocab;
 import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
-import io.digitalstate.stix.vocabulary.vocabularies.*;
+import io.digitalstate.stix.vocabulary.vocabularies.AttackMotivations;
+import io.digitalstate.stix.vocabulary.vocabularies.AttackResourceLevels;
+import io.digitalstate.stix.vocabulary.vocabularies.ThreatActorLabels;
+import io.digitalstate.stix.vocabulary.vocabularies.ThreatActorRoles;
+import io.digitalstate.stix.vocabulary.vocabularies.ThreatActorSophistication;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Optional;
 import java.util.Set;
 
@@ -40,13 +45,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 public interface ThreatActorSdo extends DomainObject {
 
     @Override
-    @NotNull @Size(min = 1, message = "Must have at least one value from threat-actor-label-ov")
     @Vocab(ThreatActorLabels.class)
     @JsonPropertyDescription("This field specifies the type of threat actor. Open Vocab - threat-actor-label-ov")
     @Redactable(useMask = true)
-    Set<@Size(min = 1) String> getLabels();
+    Set<String> getLabels();
 
-    @NotBlank
     @JsonProperty("name")
     @JsonPropertyDescription("A name used to identify this Threat Actor or Threat Actor group.")
     @Redactable(useMask = true)
@@ -57,26 +60,22 @@ public interface ThreatActorSdo extends DomainObject {
     @Redactable
     Optional<String> getDescription();
 
-    @NotNull
     @JsonProperty("aliases") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("A list of other names that this Threat Actor is believed to use.")
     @Redactable
     Set<String> getAliases();
 
-    @NotNull
     @Vocab(ThreatActorRoles.class)
     @JsonProperty("roles") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("This is a list of roles the Threat Actor plays. Open Vocab - threat-actor-role-ov")
     @Redactable
     Set<String> getRoles();
 
-    @NotNull
     @JsonProperty("goals") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The high level goals of this Threat Actor, namely, what are they trying to do.")
     @Redactable
-    Set<@Size(min = 1) String> getGoals();
+    Set<String> getGoals();
 
-    @NotNull
     @JsonProperty("sophistication") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The skill, specific knowledge, special training, or expertise a Threat Actor must have to perform the attack. Open Vocab - threat-actor-sophistication-ov")
     @Redactable
@@ -92,14 +91,12 @@ public interface ThreatActorSdo extends DomainObject {
     @Redactable
     Optional<@Vocab(AttackMotivations.class) String> getPrimaryMotivation();
 
-    @NotNull
     @Vocab(AttackMotivations.class)
     @JsonProperty("secondary_motivations") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The secondary reasons, motivations, or purposes behind this Threat Actor. Open Vocab - attack-motivation-ov")
     @Redactable
     Set<String> getSecondaryMotivations();
 
-    @NotNull
     @Vocab(AttackMotivations.class)
     @JsonProperty("personal_motivations") @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The personal reasons, motivations, or purposes of the Threat Actor regardless of organizational goals. Open Vocab - attack-motivation-ov")

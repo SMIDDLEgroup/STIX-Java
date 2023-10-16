@@ -12,7 +12,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
@@ -43,8 +42,7 @@ public interface TcpExtensionExt extends CyberObservableExtension {
      */
     @JsonProperty("src_flags_hex")
     @JsonPropertyDescription("Specifies the source TCP flags, as the union of all TCP flags observed between the start of the traffic (as defined by the start property) and the end of the traffic (as defined by the end property). ")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$")
-            String> getSrcFlagsHex();
+    Optional<String> getSrcFlagsHex();
 
     /**
      * Specifies the destination TCP flags, as the union of all TCP flags
@@ -54,7 +52,6 @@ public interface TcpExtensionExt extends CyberObservableExtension {
      */
     @JsonProperty("dst_flags_hex")
     @JsonPropertyDescription("Specifies the destination TCP flags, as the union of all TCP flags observed between the start of the traffic (as defined by the start property) and the end of the traffic (as defined by the end property).")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$")
-            String> getDstFlagsHex();
+    Optional<String> getDstFlagsHex();
 
 }

@@ -15,14 +15,9 @@ import io.digitalstate.stix.validation.contraints.vocab.Vocab;
 import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import io.digitalstate.stix.vocabulary.vocabularies.HashingAlgorithms;
 import io.digitalstate.stix.vocabulary.vocabularies.WindowsPeBinaryTypes;
-import org.hibernate.validator.constraints.Length;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
-import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -48,7 +43,6 @@ public interface WindowsPeBinaryFileExtensionExt extends CyberObservableExtensio
 
     @JsonProperty("pe_type")
     @JsonPropertyDescription("Specifies the type of the PE binary. Open Vocabulary - windows-pebinary-type-ov")
-    @NotNull
     @Vocab(WindowsPeBinaryTypes.class)
     String getPeType();
 
@@ -58,7 +52,7 @@ public interface WindowsPeBinaryFileExtensionExt extends CyberObservableExtensio
 
     @JsonProperty("machine_hex")
     @JsonPropertyDescription("Specifies the type of target machine.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getMachineHex();
+    Optional<String> getMachineHex();
 
     @JsonProperty("number_of_sections")
     @JsonPropertyDescription("Specifies the number of sections in the PE binary, as a non-negative integer.")
@@ -70,7 +64,7 @@ public interface WindowsPeBinaryFileExtensionExt extends CyberObservableExtensio
 
     @JsonProperty("pointer_to_symbol_table_hex")
     @JsonPropertyDescription("Specifies the file offset of the COFF symbol table.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getPointerToSymbolTableHex();
+    Optional<String> getPointerToSymbolTableHex();
 
     @JsonProperty("number_of_symbols")
     @JsonPropertyDescription("Specifies the number of entries in the symbol table of the PE binary, as a non-negative integer.")
@@ -78,15 +72,15 @@ public interface WindowsPeBinaryFileExtensionExt extends CyberObservableExtensio
 
     @JsonProperty("size_of_optional_header")
     @JsonPropertyDescription("Specifies the size of the optional header of the PE binary.")
-    Optional<@PositiveOrZero Long> getSizeOfOptionalHeader();
+    Optional<Long> getSizeOfOptionalHeader();
 
     @JsonProperty("characteristics_hex")
     @JsonPropertyDescription("Specifies the flags that indicate the file\u2019s characteristics.")
-    Optional<@Pattern(regexp = "^([a-fA-F0-9]{2})+$") String> getCharacteristicsHex();
+    Optional<String> getCharacteristicsHex();
 
     @JsonProperty("file_header_hashes")
     @JsonPropertyDescription("Specifies any hashes that were computed for the file header.")
-    Map<@Length(min = 3, max = 256) @HashingVocab(HashingAlgorithms.class) String, String> getFileHeaderHashes();
+    Map<@HashingVocab(HashingAlgorithms.class) String, String> getFileHeaderHashes();
 
     @JsonProperty("optional_header")
     @JsonPropertyDescription("Specifies the PE optional header of the PE binary.")

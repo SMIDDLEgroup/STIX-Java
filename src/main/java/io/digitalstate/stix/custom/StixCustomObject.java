@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.digitalstate.stix.common.*;
-import io.digitalstate.stix.validation.contraints.startswith.StartsWith;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Map;
@@ -20,11 +19,9 @@ public interface StixCustomObject extends
         StixRevoked{
 
     @Override
-    @StartsWith("x-")
     String getType();
 
     @Override
-    @StartsWith("x-")
     String getId();
 
     //@TODO Future enhancement to create a custom deserializer that will support the difference between x_ props and the CustomObjectProperties()

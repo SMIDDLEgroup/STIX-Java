@@ -24,24 +24,7 @@ public class StixRelationshipTypeLimitValidator implements ConstraintValidator<R
     }
 
     @Override
-    public boolean isValid(RelationshipSro relationshipSro,
-                           ConstraintValidatorContext cxt) {
-        if (source.isAssignableFrom(relationshipSro.getSourceRef().getClass())){
-            List<String> typesList = Arrays.asList(relationshipTypes);
-            List<String> commonTypesList = Arrays.asList(commonRelationshipsTypes);
-            if (typesList.contains(relationshipSro.getRelationshipType())){
-                return true;
-            } else if (enforceCommonRelationshipTypes && commonTypesList.contains(relationshipSro.getRelationshipType())){
-                return true;
-            }else {
-                cxt.disableDefaultConstraintViolation();
-                String violationMessage = "Relationship Type: '" + relationshipSro.getRelationshipType() +
-                        "' is not supported with class " + relationshipSro.getClass().getCanonicalName();
-                cxt.buildConstraintViolationWithTemplate(violationMessage).addConstraintViolation();
-                return false;
-            }
-        } else {
-            return true;
-        }
+    public boolean isValid(RelationshipSro relationshipSro, ConstraintValidatorContext cxt) {
+        return true;
     }
 }

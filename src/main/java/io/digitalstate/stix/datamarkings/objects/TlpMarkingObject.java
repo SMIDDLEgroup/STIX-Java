@@ -12,8 +12,6 @@ import io.digitalstate.stix.vocabulary.vocabularies.TlpLevels;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-
 @Value.Immutable @Serial.Version(1L)
 @Value.Style(typeImmutable = "Tlp", additionalJsonAnnotations = {JsonTypeName.class}, validationMethod = Value.Style.ValidationMethod.NONE, depluralize = true)
 @JsonSerialize(as = Tlp.class) @JsonDeserialize(builder = Tlp.Builder.class)
@@ -21,7 +19,6 @@ import javax.validation.constraints.NotNull;
 @JsonTypeName("tlp")
 public interface TlpMarkingObject extends GenericValidation, StixMarkingObject {
 
-    @NotNull
     @JsonProperty("tlp")
     @Vocab(TlpLevels.class)
     String getTlp();

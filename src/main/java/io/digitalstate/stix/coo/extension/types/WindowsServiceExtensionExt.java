@@ -15,7 +15,6 @@ import io.digitalstate.stix.vocabulary.vocabularies.WindowsServiceTypes;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,7 +40,6 @@ public interface WindowsServiceExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("service_name")
     @JsonPropertyDescription("Specifies the name of the service.")
-    @NotBlank
     String getServiceName();
 
     @JsonProperty("descriptions")

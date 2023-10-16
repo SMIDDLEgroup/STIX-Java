@@ -11,8 +11,6 @@ import org.hibernate.validator.constraints.Range;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -48,7 +46,6 @@ public interface NetworkTrafficCoo extends CyberObservableObject {
 
     @JsonProperty("is_active")
     @JsonPropertyDescription("Indicates whether the network traffic is still ongoing.")
-    @NotNull
     Optional<Boolean> isActive();
 
     /*
@@ -83,7 +80,6 @@ public interface NetworkTrafficCoo extends CyberObservableObject {
      */
     @JsonProperty("protocols")
     @JsonPropertyDescription("Specifies the protocols observed in the network traffic, along with their corresponding state.")
-    @NotNull
     Set<String> getProtocols();
 
     @JsonProperty("src_byte_count")

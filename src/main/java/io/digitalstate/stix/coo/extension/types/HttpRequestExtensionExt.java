@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
@@ -11,7 +15,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,12 +40,10 @@ public interface HttpRequestExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("request_method")
     @JsonPropertyDescription("Specifies the HTTP method portion of the HTTP request line, as a lowercase string.")
-    @NotNull
     String getRequestMethod();
 
     @JsonProperty("request_value")
     @JsonPropertyDescription("Specifies the value (typically a resource path) portion of the HTTP request line.")
-    @NotNull
     String getRequestValue();
 
     @JsonProperty("request_version")

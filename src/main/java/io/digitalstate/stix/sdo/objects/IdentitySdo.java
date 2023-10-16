@@ -1,6 +1,10 @@
 package io.digitalstate.stix.sdo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.redaction.Redactable;
@@ -13,8 +17,6 @@ import io.digitalstate.stix.vocabulary.vocabularies.IndustrySectors;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,7 +43,6 @@ public interface IdentitySdo extends DomainObject {
     // Note for the labels attribute:
     // The list of roles that this Identity performs (e.g., CEO, Domain Administrators, Doctors, Hospital, or Retailer). No open vocabulary is yet defined for this property.
 
-    @NotBlank
     @JsonProperty("name")
     @JsonPropertyDescription("The name of this Identity.")
     @Redactable(useMask = true)
@@ -52,14 +53,12 @@ public interface IdentitySdo extends DomainObject {
     @Redactable
     Optional<String> getDescription();
 
-    @NotBlank
     @Vocab(IdentityClasses.class)
     @JsonProperty("identity_class")
     @JsonPropertyDescription("The type of entity that this Identity describes, e.g., an individual or organization. Open Vocab - identity-class-ov")
     @Redactable(useMask = true)
     String getIdentityClass();
 
-    @NotNull
     @Vocab(IndustrySectors.class)
     @JsonProperty("sectors")
     @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)

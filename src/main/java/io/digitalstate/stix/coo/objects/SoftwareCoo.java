@@ -9,8 +9,6 @@ import io.digitalstate.stix.validation.groups.DefaultValuesProcessor;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,7 +32,6 @@ public interface SoftwareCoo extends CyberObservableObject {
 
     @JsonProperty("name")
     @JsonPropertyDescription("Specifies the name of the software.")
-    @NotNull
     String getName();
     
     /**
@@ -52,7 +49,7 @@ public interface SoftwareCoo extends CyberObservableObject {
      */
     @JsonProperty("languages")
     @JsonPropertyDescription("Specifies the languages supported by the software.")
-    Set<@Pattern(regexp="^[a-z]{3}$") String> getLanguages();
+    Set<String> getLanguages();
 
     @JsonProperty("vendor")
     @JsonPropertyDescription("Specifies the name of the vendor of the software.")
