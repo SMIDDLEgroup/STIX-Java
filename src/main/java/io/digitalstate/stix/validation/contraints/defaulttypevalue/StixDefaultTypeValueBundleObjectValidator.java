@@ -2,8 +2,8 @@ package io.digitalstate.stix.validation.contraints.defaulttypevalue;
 
 import io.digitalstate.stix.bundle.BundleObject;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * This is used solely for a STIX Bundle.

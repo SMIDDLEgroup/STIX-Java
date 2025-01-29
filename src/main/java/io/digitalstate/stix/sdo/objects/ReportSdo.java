@@ -30,15 +30,16 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 /**
  * report
  * <p>
- * Reports are collections of threat intelligence focused on one or more topics, such as a 
+ * Reports are collections of threat intelligence focused on one or more topics, such as a
  * description of a threat actor, malware, or attack technique, including context and related details.
- * 
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @JsonTypeName("report")
 @DefaultTypeValue(value = "report", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Sdo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = Report.class) @JsonDeserialize(builder = Report.Builder.class)
+@Value.Style(typeAbstract = "*Sdo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = Report.class)
+@JsonDeserialize(builder = Report.Builder.class)
 @JsonPropertyOrder({"type", "id", "created_by_ref", "created",
         "modified", "revoked", "labels", "external_references",
         "object_marking_refs", "granular_markings", "name", "description",
@@ -56,7 +57,8 @@ public interface ReportSdo extends DomainObject {
     @Redactable(useMask = true)
     String getName();
 
-    @JsonProperty("description") @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonProperty("description")
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("A description that provides more details and context about Report.")
     @Redactable
     Optional<String> getDescription();
@@ -68,9 +70,9 @@ public interface ReportSdo extends DomainObject {
 
     @JsonProperty("object_refs")
     @JsonPropertyDescription("Specifies the STIX Objects that are referred to by this Report.")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
-    @JsonDeserialize( converter = BundleableObjectSetConverter.class)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonDeserialize(converter = BundleableObjectSetConverter.class)
     @Redactable(useMask = true)
     Set<BundleableObject> getObjectRefs();
 }

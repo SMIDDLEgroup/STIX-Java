@@ -31,7 +31,7 @@ public class StixInstant {
 
     public StixInstant(Instant instant, int subSecondPrecision) {
         Objects.requireNonNull(instant);
-        if (subSecondPrecision < 0 || subSecondPrecision > 9){
+        if (subSecondPrecision < 0 || subSecondPrecision > 9) {
             throw new IllegalStateException("Subsecond precision must be between 0 and 9");
         }
 
@@ -43,6 +43,7 @@ public class StixInstant {
      * Defaults with parsed Instant's Nano second precision digit count.
      * Note that trailing zeros would have been stripped.
      * If you need to keep exact precision, including the trailing zeros, use {@link StixInstant#StixInstant(Instant, int)}
+     *
      * @param instant
      */
     public StixInstant(Instant instant) {
@@ -52,6 +53,7 @@ public class StixInstant {
     /**
      * Get the underlying Instant value.  If you need the Stix Date with the Stix Precision then use {@link StixInstant#toString()}
      * getInstant() should only be used in special cases where you need access to perform temporal work.
+     *
      * @return
      */
     public Instant getInstant() {
@@ -65,6 +67,7 @@ public class StixInstant {
     /**
      * Generates a STIX Spec String of DateTime.
      * Uses {@link StixDataFormats#getWriterStixDateTimeFormatter(int)}
+     *
      * @return
      */
     @Override
@@ -78,7 +81,7 @@ public class StixInstant {
                 .format(this.instant);
     }
 
-    public static StixInstant parse(String dateString){
+    public static StixInstant parse(String dateString) {
         Objects.requireNonNull(dateString);
 
         Instant instant = Instant.from(StixDataFormats.getReaderStixDateTimeFormatter().parse(dateString));
@@ -87,12 +90,12 @@ public class StixInstant {
         return new StixInstant(instant, subSecondPrecision);
     }
 
-    private static int getSubSecondDigitCount(String dateString){
+    private static int getSubSecondDigitCount(String dateString) {
         Matcher matcher = REGEX_SUBSECOND.matcher(dateString);
-        if (matcher.find()){
+        if (matcher.find()) {
             String subSeconds = matcher.group("subSecond");
             // If no sub seconds were provided then return 0 as the precision
-            if (subSeconds == null){
+            if (subSeconds == null) {
                 return 0;
             } else {
                 return subSeconds.length();

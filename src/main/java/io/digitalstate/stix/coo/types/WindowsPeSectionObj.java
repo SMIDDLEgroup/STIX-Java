@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixCustomProperties;
@@ -19,14 +23,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 /**
  * The PE Section type specifies metadata about a PE file section.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 //@DefaultTypeValue(value = "windows-pe-section-type", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Obj", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
-@JsonSerialize(as = WindowsPeSection.class) @JsonDeserialize(builder = WindowsPeSection.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "name", "size", "entropy", "hashes" })
+@Value.Style(typeAbstract = "*Obj", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
+@JsonSerialize(as = WindowsPeSection.class)
+@JsonDeserialize(builder = WindowsPeSection.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"name", "size", "entropy", "hashes"})
 //@JsonTypeName("windows-pe-section-type")
 public interface WindowsPeSectionObj extends GenericValidation, StixCustomProperties, Serializable {
 

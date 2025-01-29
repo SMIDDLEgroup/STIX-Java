@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -20,14 +24,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * windows-registry-key
  * <p>
  * The Registry Key Object represents the properties of a Windows registry key.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "windows-registry-key", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = WindowsRegistryKey.class) @JsonDeserialize(builder = WindowsRegistryKey.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "type", "key", "values", "modified", "creator_user_ref", "number_of_subkeys", "extensions" })
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = WindowsRegistryKey.class)
+@JsonDeserialize(builder = WindowsRegistryKey.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"type", "key", "values", "modified", "creator_user_ref", "number_of_subkeys", "extensions"})
 @JsonTypeName("windows-registry-key")
 public interface WindowsRegistryKeyCoo extends CyberObservableObject {
 

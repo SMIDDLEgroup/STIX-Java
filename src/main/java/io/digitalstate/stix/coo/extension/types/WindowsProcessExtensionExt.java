@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
@@ -19,14 +23,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 /**
  * The Windows Process extension specifies a default extension for capturing properties specific to Windows processes.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "windows-process-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
-@JsonSerialize(as = WindowsProcessExtension.class) @JsonDeserialize(builder = WindowsProcessExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "aslr_enabled", "dep_enabled", "priority", "owner_sid", "window_title", "startup_info" })
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
+@JsonSerialize(as = WindowsProcessExtension.class)
+@JsonDeserialize(builder = WindowsProcessExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"aslr_enabled", "dep_enabled", "priority", "owner_sid", "window_title", "startup_info"})
 @JsonTypeName("windows-process-ext")
 @AllowedParents({ProcessCoo.class})
 @BusinessRule(ifExp = "isAslrEnabled().orElse(false) == true || isDepEnabled().orElse(false) == true", thenExp = "isDepEnabled().orElse(false) == false || isAslrEnabled().orElse(false) == false", errorMessage = "Dep and ASLR cannot both be enabled")
@@ -56,6 +61,6 @@ public interface WindowsProcessExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("startup_info")
     @JsonPropertyDescription("Specifies the STARTUP_INFO struct used by the process, as a dictionary.")
-    Map<String,String> getStartupInfo();
+    Map<String, String> getStartupInfo();
 
 }

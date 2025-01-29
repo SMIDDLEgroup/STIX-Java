@@ -10,9 +10,11 @@ import io.digitalstate.stix.validation.GenericValidation;
 import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @Value.Style(typeImmutable = "Statement", additionalJsonAnnotations = {JsonTypeName.class}, validationMethod = Value.Style.ValidationMethod.NONE, depluralize = true)
-@JsonSerialize(as = Statement.class) @JsonDeserialize(builder = Statement.Builder.class)
+@JsonSerialize(as = Statement.class)
+@JsonDeserialize(builder = Statement.Builder.class)
 @Redactable
 @JsonTypeName("statement")
 public interface StatementMarkingObject extends GenericValidation, StixMarkingObject {

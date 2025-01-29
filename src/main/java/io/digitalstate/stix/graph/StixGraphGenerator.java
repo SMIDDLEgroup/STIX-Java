@@ -20,7 +20,7 @@ public class StixGraphGenerator implements GraphGenerator {
     }
 
     @Override
-    public Set<GraphElement> process(){
+    public Set<GraphElement> process() {
         Set<GraphElement> elements = new HashSet<>();
 
         elements.addAll(new BundleObjectGraphGenerator(bundle).process());
@@ -28,7 +28,7 @@ public class StixGraphGenerator implements GraphGenerator {
         return elements;
     }
 
-    public String toJson(){
+    public String toJson() {
         try {
             return jsonMapper.writeValueAsString(process());
         } catch (JsonProcessingException e) {

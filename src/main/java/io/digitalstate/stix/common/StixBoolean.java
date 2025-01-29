@@ -27,7 +27,7 @@ public class StixBoolean {
         isDefinedValue = false;
     }
 
-    public StixBoolean(String booleanString){
+    public StixBoolean(String booleanString) {
         this.stixBooleanValue = Boolean.valueOf(booleanString);
         this.isDefinedValue = true;
     }
@@ -39,6 +39,7 @@ public class StixBoolean {
     /**
      * Indicates that the boolean value was explicitly defined, even if the value was false,
      * and the original object's property defaults to false if no value is provided.
+     *
      * @return boolean indicating if the value was defined.
      */
     public boolean isdefinedValue() {

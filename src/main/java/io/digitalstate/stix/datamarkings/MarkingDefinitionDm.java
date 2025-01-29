@@ -24,11 +24,13 @@ import org.immutables.value.Value;
  *     <li>{@link MarkingDefinition#getDefinition()}  - the Marking Object.  Two objects are currently supported: {@link Tlp} and {@link Statement}.</li>
  * </ol>
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @JsonTypeName("marking-definition")
 @DefaultTypeValue(value = "marking-definition", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Dm", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = MarkingDefinition.class) @JsonDeserialize(builder = MarkingDefinition.Builder.class)
+@Value.Style(typeAbstract = "*Dm", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = MarkingDefinition.class)
+@JsonDeserialize(builder = MarkingDefinition.Builder.class)
 @JsonPropertyOrder({"type", "id", "created_by_ref", "created",
         "external_references", "object_marking_refs", "granular_markings", "definition_type",
         "definition"})

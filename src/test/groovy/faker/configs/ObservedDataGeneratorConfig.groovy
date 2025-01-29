@@ -1,26 +1,6 @@
 package faker.configs
 
-import faker.configs.sdo.observeddata.ObservedData_ArtifactCooConfig
-import faker.configs.sdo.observeddata.ObservedData_AutonomousSystemCooConfig
-import faker.configs.sdo.observeddata.ObservedData_DirectoryCooConfig
-import faker.configs.sdo.observeddata.ObservedData_DomainNameCooConfig
-import faker.configs.sdo.observeddata.ObservedData_EmailAddressCooConfig
-import faker.configs.sdo.observeddata.ObservedData_EmailMessageCooConfig
-import faker.configs.sdo.observeddata.ObservedData_ExternalReferencesConfig
-import faker.configs.sdo.observeddata.ObservedData_FileCooConfig
-import faker.configs.sdo.observeddata.ObservedData_GranularMarkingConfig
-import faker.configs.sdo.observeddata.ObservedData_Ipv4AddressCooConfig
-import faker.configs.sdo.observeddata.ObservedData_Ipv6AddressCooConfig
-import faker.configs.sdo.observeddata.ObservedData_MacAddressCooConfig
-import faker.configs.sdo.observeddata.ObservedData_MutexCooConfig
-import faker.configs.sdo.observeddata.ObservedData_NetworkTrafficCooConfig
-import faker.configs.sdo.observeddata.ObservedData_ObjectMarkingsConfig
-import faker.configs.sdo.observeddata.ObservedData_ProcessCooConfig
-import faker.configs.sdo.observeddata.ObservedData_SoftwareCooConfig
-import faker.configs.sdo.observeddata.ObservedData_UrlCooConfig
-import faker.configs.sdo.observeddata.ObservedData_UserAccountCooConfig
-import faker.configs.sdo.observeddata.ObservedData_WindowsRegistryKeyCooConfig
-import faker.configs.sdo.observeddata.ObservedData_X509CertificateCooConfig
+import faker.configs.sdo.observeddata.*
 
 import java.time.Instant
 import java.time.LocalDate

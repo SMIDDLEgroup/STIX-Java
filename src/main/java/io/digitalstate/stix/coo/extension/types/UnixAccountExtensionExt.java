@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
@@ -22,14 +26,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * <p>
  * The UNIX account extension specifies a default extension for capturing the additional information
  * for an account on a UNIX system.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "unix-account-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
-@JsonSerialize(as = UnixAccountExtension.class) @JsonDeserialize(builder = UnixAccountExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "gid", "groups", "home_dir", "shell" })
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
+@JsonSerialize(as = UnixAccountExtension.class)
+@JsonDeserialize(builder = UnixAccountExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"gid", "groups", "home_dir", "shell"})
 @JsonTypeName("unix-account-ext")
 @AllowedParents({UserAccountCoo.class})
 @BusinessRule(ifExp = "true", thenExp = "getGid().isPresent() == true || getGroups().isEmpty() == false || getHomeDir().isPresent() == true || getShell().isPresent() == true", errorMessage = "At least one field must be provided for Unix Account Extension")

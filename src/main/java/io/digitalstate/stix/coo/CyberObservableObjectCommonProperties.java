@@ -25,11 +25,12 @@ public interface CyberObservableObjectCommonProperties extends GenericValidation
 
     /**
      * Multiple extensions can be added, but only 1 instance of a specific extension can be added.
+     *
      * @return
      */
     // @TODO Add validation to ensure that only 1 instance of each extension is applied as per the spec
     @JsonProperty("extensions")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("Specifies any extensions of the object, as a dictionary.")
     @JsonSerialize(using = CyberObservableExtensionsFieldSerializer.class)
     @JsonDeserialize(using = CyberObservableExtensionsFieldDeserializer.class)
@@ -38,11 +39,12 @@ public interface CyberObservableObjectCommonProperties extends GenericValidation
     /**
      * Used for generation of Map Keys by {@link ObservedDataSdo#getObjects()}
      * Manually set this value if you want to control key names.  Otherwise UUIDs will be used.
+     *
      * @return
      */
     @JsonProperty(value = "observable_object_key", access = JsonProperty.Access.WRITE_ONLY)
     @Value.Default
-    default String getObservableObjectKey(){
+    default String getObservableObjectKey() {
         return UUID.randomUUID().toString();
     }
 

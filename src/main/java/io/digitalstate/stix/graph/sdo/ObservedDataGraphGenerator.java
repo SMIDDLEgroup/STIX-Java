@@ -37,7 +37,7 @@ public class ObservedDataGraphGenerator implements GraphGenerator {
         return object;
     }
 
-    private Set<GraphElement> generateCooElements(){
+    private Set<GraphElement> generateCooElements() {
         Set<GraphElement> elements = new HashSet<>();
 
         String observedDataId = object.getId();
@@ -49,7 +49,7 @@ public class ObservedDataGraphGenerator implements GraphGenerator {
             elements.add(cooGraphNode);
 
             String uuidPrefix = "ref";
-            String uuid =  uuidPrefix + "-" + UUID.randomUUID().toString();
+            String uuid = uuidPrefix + "-" + UUID.randomUUID().toString();
             // Use the Cyber Observable node's ID as the target:
             Edge edge = new Edge(uuid, uuidPrefix, observedDataId, cooGraphNode.getData().getId(), null);
 

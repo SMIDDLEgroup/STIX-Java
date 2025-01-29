@@ -3,8 +3,8 @@ package io.digitalstate.stix.validation.contraints.markingdefinitiontype;
 import io.digitalstate.stix.datamarkings.MarkingDefinitionDm;
 import io.digitalstate.stix.datamarkings.StixMarkingObject;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class StixMarkingDefinitionTypeLimitValidator implements ConstraintValidator<MarkingDefinitionTypeLimit, MarkingDefinitionDm> {
 

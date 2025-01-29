@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixCustomProperties;
@@ -21,18 +25,19 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * The X509 Certificate Object represents the properties of an X.509 certificate.
  * Note that the X.509 v3 Extensions type is not a STIX Cyber Observables extension,
  * it is a type that describes X.509 extensions.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 //@DefaultTypeValue(value = "x509-v3-extensions-type", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Obj", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = X509v3Extensions.class) @JsonDeserialize(builder = X509v3Extensions.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "basic_constraints", "name_constraints", "policy_constraints", "key_usage", "extended_key_usage",
+@Value.Style(typeAbstract = "*Obj", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = X509v3Extensions.class)
+@JsonDeserialize(builder = X509v3Extensions.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"basic_constraints", "name_constraints", "policy_constraints", "key_usage", "extended_key_usage",
         "subject_key_identifier", "authority_key_identifier", "subject_alternative_name", "issuer_alternative_name",
         "subject_directory_attributes", "crl_distribution_points", "inhibit_any_policy",
         "private_key_usage_period_not_before", "private_key_usage_period_not_after", "certificate_policies",
-        "policy_mappings" })
+        "policy_mappings"})
 //@JsonTypeName("x509-v3-extensions-type")
 @BusinessRule(ifExp = "true", thenExp = "getBasicConstraints().isPresent() == true || getNameConstraints().isPresent() == true || getPolicyConstraints().isPresent() == true || getKeyUsage().isPresent() == true || getExtendedKeyUsage().isPresent() == true || getSubjectKeyIdentifier().isPresent() == true || getAuthorityKeyIdentifier().isPresent() == true || getSubjectAlternativeName().isPresent() == true || getIssuerAlternativeName().isPresent() == true || getSubjectDirectoryAttributes().isPresent() == true || getCrlDistributionPoints().isPresent() == true || getInhibitAnyPolicy().isPresent() == true || getPrivateKeyUsagePeriodNotBefore().isPresent() == true || getPrivateKeyUsagePeriodNotAfter().isPresent() == true || getCertificatePolicies().isPresent() == true || getPolicyMappings().isPresent() == true", errorMessage = "At least 1 property must be provided")
 public interface X509v3ExtensionsObj extends GenericValidation, StixCustomProperties, Serializable {

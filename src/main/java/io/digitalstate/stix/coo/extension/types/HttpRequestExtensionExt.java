@@ -25,15 +25,16 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * <p>
  * The HTTP request extension specifies a default extension for capturing
  * network traffic properties specific to HTTP requests.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "http-request-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
-@JsonSerialize(as = HttpRequestExtension.class) @JsonDeserialize(builder = HttpRequestExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "request_method", "request_value", "request_version", "request_header", "message_body_length",
-        "message_body_data_ref" })
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
+@JsonSerialize(as = HttpRequestExtension.class)
+@JsonDeserialize(builder = HttpRequestExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"request_method", "request_value", "request_version", "request_header", "message_body_length",
+        "message_body_data_ref"})
 @JsonTypeName("http-request-ext")
 @AllowedParents({NetworkTrafficCoo.class})
 public interface HttpRequestExtensionExt extends CyberObservableExtension {
@@ -52,11 +53,12 @@ public interface HttpRequestExtensionExt extends CyberObservableExtension {
 
     /**
      * Currently only supports non-duplicate keys: https://github.com/oasis-tcs/cti-stix2/issues/137
+     *
      * @return
      */
     @JsonProperty("request_header")
     @JsonPropertyDescription("Specifies all of the HTTP header fields that may be found in the HTTP client request, as a dictionary.")
-    Map<String,String> getRequestHeader();
+    Map<String, String> getRequestHeader();
 
     //@TODO Review if this should be a long
     @JsonProperty("message_body_length")

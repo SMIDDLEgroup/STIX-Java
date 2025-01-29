@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
-public class  NodeData {
+public class NodeData {
 
     private String id;
     private String type;
@@ -43,7 +43,7 @@ public class  NodeData {
     }
 
     @JsonProperty("parent")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     public String getParent() {
         return parent;
     }
@@ -53,7 +53,7 @@ public class  NodeData {
     }
 
     @JsonProperty("stix")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     public Object getJsonData() {
         return jsonData;
     }
@@ -64,7 +64,7 @@ public class  NodeData {
 
     @JsonUnwrapped
     @JsonAnyGetter
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     public HashMap<String, Object> getAdditionalProperties() {
         return additionalProperties;
     }

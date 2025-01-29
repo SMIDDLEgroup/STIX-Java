@@ -64,7 +64,7 @@ public class EdgeData {
     }
 
     @JsonProperty("stix")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     public Object getJsonData() {
         return jsonData;
     }
@@ -74,7 +74,7 @@ public class EdgeData {
     }
 
     @JsonProperty("label")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     public String getEdgeLabel() {
         return edgeLabel;
     }
@@ -85,7 +85,7 @@ public class EdgeData {
 
     @JsonUnwrapped
     @JsonAnyGetter
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     public HashMap<String, Object> getAdditionalProperties() {
         return additionalProperties;
     }

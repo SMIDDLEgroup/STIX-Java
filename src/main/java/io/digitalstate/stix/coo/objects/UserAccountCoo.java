@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -22,17 +26,18 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * The User Account Object represents an instance of any type of user account,
  * including but not limited to operating system, device, messaging service, and
  * social media platform accounts.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "user-account", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = UserAccount.class) @JsonDeserialize(builder = UserAccount.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = UserAccount.class)
+@JsonDeserialize(builder = UserAccount.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 @JsonTypeName("user-account")
-@JsonPropertyOrder({ "type", "extensions","user_id", "account_login", "account_type", "display_name",
+@JsonPropertyOrder({"type", "extensions", "user_id", "account_login", "account_type", "display_name",
         "is_service_account", "is_privileged", "can_escalate_privs", "is_disabled", "account_created",
-        "account_expires", "password_last_changed", "account_first_login", "account_last_login" })
+        "account_expires", "password_last_changed", "account_first_login", "account_last_login"})
 public interface UserAccountCoo extends CyberObservableObject {
 
     @JsonProperty("user_id")

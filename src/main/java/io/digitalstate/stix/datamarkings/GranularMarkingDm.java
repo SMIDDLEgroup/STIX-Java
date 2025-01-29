@@ -16,15 +16,17 @@ import org.immutables.value.Value;
 import java.io.Serializable;
 import java.util.Set;
 
-@Value.Immutable @Serial.Version(1L)
-@Value.Style(typeAbstract="*Dm", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, depluralize = true)
-@JsonSerialize(as = GranularMarking.class) @JsonDeserialize(builder = GranularMarking.Builder.class)
+@Value.Immutable
+@Serial.Version(1L)
+@Value.Style(typeAbstract = "*Dm", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, depluralize = true)
+@JsonSerialize(as = GranularMarking.class)
+@JsonDeserialize(builder = GranularMarking.Builder.class)
 @Redactable
 public interface GranularMarkingDm extends StixCustomProperties, SdoDefaultValidator, Serializable {
 
     @JsonProperty("marking_ref")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonDeserialize(converter = MarkingDefinitionConverter.class)
     MarkingDefinitionDm getMarkingRef();
 

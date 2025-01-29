@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -27,16 +31,17 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 /**
  * The Windows PE Binary File extension specifies a default extension for
  * capturing properties specific to Windows portable executable (PE) files.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "windows-pebinary-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
-@JsonSerialize(as = WindowsPeBinaryFileExtension.class) @JsonDeserialize(builder = WindowsPeBinaryFileExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "pe_type", "imphash", "machine_hex", "number_of_sections", "time_date_stamp",
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
+@JsonSerialize(as = WindowsPeBinaryFileExtension.class)
+@JsonDeserialize(builder = WindowsPeBinaryFileExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"pe_type", "imphash", "machine_hex", "number_of_sections", "time_date_stamp",
         "pointer_to_symbol_table_hex", "number_of_symbols", "size_of_optional_header", "characteristics_hex",
-        "file_header_hashes", "optional_header", "sections", "required" })
+        "file_header_hashes", "optional_header", "sections", "required"})
 @JsonTypeName("windows-pebinary-ext")
 @AllowedParents({FileCoo.class})
 public interface WindowsPeBinaryFileExtensionExt extends CyberObservableExtension {

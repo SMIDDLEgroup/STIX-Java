@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixCustomProperties;
@@ -19,12 +23,14 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 /**
  * The Windows Registry Value type captures the properties of a Windows Registry Key Value.
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 //@DefaultTypeValue(value = "windows-registry-value-type", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Obj", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = WindowsRegistryValue.class) @JsonDeserialize(builder = WindowsRegistryValue.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "name", "data", "data_type" })
+@Value.Style(typeAbstract = "*Obj", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = WindowsRegistryValue.class)
+@JsonDeserialize(builder = WindowsRegistryValue.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"name", "data", "data_type"})
 //@JsonTypeName("windows-registry-value-type")
 public interface WindowsRegistryValueObj extends GenericValidation, StixCustomProperties, Serializable {
 

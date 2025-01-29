@@ -11,18 +11,18 @@ import java.util.stream.Stream;
 public class RelationshipTypes implements StixVocabulary {
 
     private static Set<String> terms = new HashSet<>(Arrays.asList(
-                "targets",
-                "uses",
-                "attributed-to",
-                "mitigates",
-                "indicates",
-                "variant-of",
-                "impersonates"));
+            "targets",
+            "uses",
+            "attributed-to",
+            "mitigates",
+            "indicates",
+            "variant-of",
+            "impersonates"));
 
     private static Set<String> commonTerms = new HashSet<>(Arrays.asList(
-                "duplicate-of",
-                "derived-from",
-                "related-to"));
+            "duplicate-of",
+            "derived-from",
+            "related-to"));
 
     @Override
     public Set<String> getAllTerms() {

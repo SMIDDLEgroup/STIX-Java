@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
@@ -25,15 +29,16 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * <p>
  * The Windows Service extension specifies a default extension for capturing
  * properties specific to Windows services.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "windows-service-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
-@JsonSerialize(as = WindowsServiceExtension.class) @JsonDeserialize(builder = WindowsServiceExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "service_name", "descriptions", "display_name", "group_name", "start_type", "service_dll_refs",
-        "service_type", "service_status" })
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
+@JsonSerialize(as = WindowsServiceExtension.class)
+@JsonDeserialize(builder = WindowsServiceExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"service_name", "descriptions", "display_name", "group_name", "start_type", "service_dll_refs",
+        "service_type", "service_status"})
 @JsonTypeName("windows-service-ext")
 @AllowedParents({ProcessCoo.class})
 public interface WindowsServiceExtensionExt extends CyberObservableExtension {

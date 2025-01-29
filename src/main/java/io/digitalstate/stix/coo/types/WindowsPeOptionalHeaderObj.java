@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixCustomProperties;
@@ -22,20 +26,21 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 /**
  * The Windows PE Optional Header type represents the properties of the PE
  * optional header.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 //@DefaultTypeValue(value = "windows-pe-optional-header-type", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Obj", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
-@JsonSerialize(as = WindowsPeOptionalHeader.class) @JsonDeserialize(builder = WindowsPeOptionalHeader.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "magic_hex", "major_linker_version", "minor_linker_version", "size_of_code",
+@Value.Style(typeAbstract = "*Obj", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
+@JsonSerialize(as = WindowsPeOptionalHeader.class)
+@JsonDeserialize(builder = WindowsPeOptionalHeader.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"magic_hex", "major_linker_version", "minor_linker_version", "size_of_code",
         "size_of_initialized_data", "size_of_uninitialized_data", "address_of_entry_point", "base_of_code",
         "base_of_data", "image_base", "section_alignment", "file_alignment", "major_os_version", "minor_os_version",
         "major_image_version", "minor_image_version", "major_subsystem_version", "minor_subsystem_version",
         "win32_version_value_hex", "size_of_image", "size_of_headers", "checksum_hex", "subsystem_hex",
         "dll_characteristics_hex", "size_of_stack_reserve", "size_of_stack_commit", "size_of_heap_reserve",
-        "size_of_heap_commit", "loader_flags_hex", "number_of_rva_and_sizes", "hashes" })
+        "size_of_heap_commit", "loader_flags_hex", "number_of_rva_and_sizes", "hashes"})
 //@JsonTypeName("windows-pe-optional-header-type")
 @BusinessRule(ifExp = "true", thenExp = "getMagicHex().isPresent() == true || getMajorLinkerVersion().isPresent() == true || getMinorLinkerVersion().isPresent() == true || getSizeOfCode().isPresent() == true || getSizeOfInitializedData().isPresent() == true || getSizeOfUninitializedData().isPresent() == true || getAddressOfEntryPoint().isPresent() == true || getBaseOfCode().isPresent() == true || getBaseOfData().isPresent() == true || getImageBase().isPresent() == true || getSectionAlignment().isPresent() == true || getFileAlignment().isPresent() == true || getMajorOsVersion().isPresent() == true || getMinorOsVersion().isPresent() == true || getMajorImageVersion().isPresent() == true || getMinorImageVersion().isPresent() == true || getMajorSubsystemVersion().isPresent() == true || getMinorSubsystemVersion().isPresent() == true || getWin32VersionValueHex().isPresent() == true || getSizeOfImage().isPresent() == true || getSizeOfHeaders().isPresent() == true || getChecksumHex().isPresent() == true || getSubsystemHex().isPresent() == true || getDllCharacteristicsHex().isPresent() == true || getSizeOfStackReserve().isPresent() == true || getSizeOfStackCommit().isPresent() == true || getSizeOfHeapReserve().isPresent() == true || getSizeOfHeapCommit().isPresent() == true || getLoaderFlagsHex().isPresent() == true || getNumberOfRvaAndSizes().isPresent() == true || getHashes().isEmpty() == true", errorMessage = "At least 1 field must be used in Windows Pe Extension Optional Header Object.")
 public interface WindowsPeOptionalHeaderObj extends GenericValidation, StixCustomProperties, Serializable {

@@ -31,9 +31,10 @@ public class StixCustomPropertiesConfig {
 
     /**
      * Returns a aggregate of The Default Custom Property Prefix and any defined additional customer property prefixes.
+     *
      * @return Set<String> of allowed custom property prefixes
      */
-    public static Set<String> getAllCustomPropertyPrefixes(){
+    public static Set<String> getAllCustomPropertyPrefixes() {
         Set<String> allPrefixes = new HashSet<>(getAdditionalPropertyPrefixes());
         allPrefixes.add(DEFAULT_CUSTOM_PROPERTY_PREFIX);
         return allPrefixes;

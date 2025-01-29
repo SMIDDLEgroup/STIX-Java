@@ -2,6 +2,7 @@ package stix.sdo
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import faker.StixMockDataGenerator
 import io.digitalstate.stix.json.StixParsers
 import io.digitalstate.stix.sdo.objects.CourseOfAction
 import org.skyscreamer.jsonassert.JSONAssert
@@ -9,27 +10,28 @@ import org.skyscreamer.jsonassert.JSONCompareMode
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
-import faker.StixMockDataGenerator
 
 class CourseOfActionSpec extends Specification {
 
-    @Shared ObjectMapper mapper = new ObjectMapper()
-    @Shared StixMockDataGenerator stixMockDataGenerator = new StixMockDataGenerator()
+    @Shared
+    ObjectMapper mapper = new ObjectMapper()
+    @Shared
+    StixMockDataGenerator stixMockDataGenerator = new StixMockDataGenerator()
 
     @Unroll
     def "Generate Course of Action Data: Run: '#i'"() {
         when: "Generating Identity Data"
-            CourseOfAction originalCourseOfAction = stixMockDataGenerator.mockCourseOfAction()
+        CourseOfAction originalCourseOfAction = stixMockDataGenerator.mockCourseOfAction()
 //            println "Original Object: ${originalCourseOfAction.toString()}"
 
         then: "Convert Course of Action to Json"
-            JsonNode originalJson = mapper.readTree(originalCourseOfAction.toJsonString())
-            String originalJsonString = mapper.writeValueAsString(originalJson)
+        JsonNode originalJson = mapper.readTree(originalCourseOfAction.toJsonString())
+        String originalJsonString = mapper.writeValueAsString(originalJson)
 //            println "Original Json: ${originalJsonString}"
 
         then: "Parse Json back into Course of Action Object"
-            CourseOfAction parsedCourseOfAction = (CourseOfAction)StixParsers.parseObject(originalJsonString)
-            CourseOfAction parsedCourseOfActionGeneric = StixParsers.parse(originalJsonString, CourseOfAction.class)
+        CourseOfAction parsedCourseOfAction = (CourseOfAction) StixParsers.parseObject(originalJsonString)
+        CourseOfAction parsedCourseOfActionGeneric = StixParsers.parse(originalJsonString, CourseOfAction.class)
 //            println "Parsed Object: ${parsedCourseOfAction}"
 
         //@TODO needs to be setup to handle dehydrated object comparison
@@ -37,14 +39,14 @@ class CourseOfActionSpec extends Specification {
 //            assert originalAttackPattern == parsedAttackPattern
 
         then: "Convert Parsed Identity Object back to into Json"
-            JsonNode newJson =  mapper.readTree(parsedCourseOfAction.toJsonString())
-            String newJsonString = mapper.writeValueAsString(newJson)
+        JsonNode newJson = mapper.readTree(parsedCourseOfAction.toJsonString())
+        String newJsonString = mapper.writeValueAsString(newJson)
 //            println "New Json: ${newJsonString}"
 
         then: "New Json should match Original Json"
-            JSONAssert.assertEquals(originalJsonString, newJsonString, JSONCompareMode.NON_EXTENSIBLE)
+        JSONAssert.assertEquals(originalJsonString, newJsonString, JSONCompareMode.NON_EXTENSIBLE)
 
         where:
-            i << (1..100)
+        i << (1..100)
     }
 }

@@ -61,7 +61,7 @@ import io.digitalstate.stix.sdo.objects.Vulnerability;
 import io.digitalstate.stix.sro.objects.Relationship;
 import io.digitalstate.stix.sro.objects.Sighting;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.io.IOException;
 
 /**
@@ -184,7 +184,7 @@ public class StixParsers {
         }
     }
 
-        public static <T extends Stix> T parse(String bundleJsonString, Class<T> stixClass) throws IOException, StixParserValidationException {
+    public static <T extends Stix> T parse(String bundleJsonString, Class<T> stixClass) throws IOException, StixParserValidationException {
         try {
             return getJsonMapper().readValue(bundleJsonString, stixClass);
         } catch (IOException ex) {

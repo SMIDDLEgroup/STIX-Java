@@ -19,6 +19,7 @@ public class StixDataFormats {
 
     /**
      * Supports 0-9 digits of Sub-Second precision storage.  (Nano Second Support)
+     *
      * @return
      */
     public static DateTimeFormatter getReaderStixDateTimeFormatter() {
@@ -33,15 +34,15 @@ public class StixDataFormats {
     }
 
     public static DateTimeFormatter getWriterStixDateTimeFormatter(int subSecondPrecision) {
-        if (subSecondPrecision > 9){
+        if (subSecondPrecision > 9) {
             throw new IllegalArgumentException("Sub-Second Precision can only be from 0 to 9 digits");
         }
         DateTimeFormatterBuilder formatterBuilder = new DateTimeFormatterBuilder();
 
         formatterBuilder.appendPattern("yyyy-MM-dd'T'HH:mm:ss");
 
-        if (subSecondPrecision > 0){
-            formatterBuilder.appendFraction(ChronoField.NANO_OF_SECOND,subSecondPrecision, subSecondPrecision, true);
+        if (subSecondPrecision > 0) {
+            formatterBuilder.appendFraction(ChronoField.NANO_OF_SECOND, subSecondPrecision, subSecondPrecision, true);
         }
 
         formatterBuilder.appendPattern("X");

@@ -10,21 +10,21 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WindowsPeBinaryTypes implements StixVocabulary {
-	
-	@JsonProperty("windows-pebinary-type-ov")
-	private Set<String> terms = new HashSet<>(Arrays.asList(
-			"exe", "dll", "sys"
-			));
 
-	@Override
-	public Set<String> getAllTerms() {
-		return terms;
-	}
+    @JsonProperty("windows-pebinary-type-ov")
+    private Set<String> terms = new HashSet<>(Arrays.asList(
+            "exe", "dll", "sys"
+    ));
 
-	@Override
-	public Set<String> getAllTermsWithAdditional(String[] terms) {
+    @Override
+    public Set<String> getAllTerms() {
+        return terms;
+    }
+
+    @Override
+    public Set<String> getAllTermsWithAdditional(String[] terms) {
         return Stream.concat(getAllTerms().stream(), Arrays.stream(terms))
                 .collect(Collectors.toCollection(HashSet::new));
-	}
+    }
 
 }

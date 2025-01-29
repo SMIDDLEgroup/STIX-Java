@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
@@ -20,14 +24,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 /**
  * The Raster Image file extension specifies a default extension for capturing
  * properties specific to image files.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "raster-image-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
-@JsonSerialize(as = RasterImageFileExtension.class) @JsonDeserialize(builder = RasterImageFileExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "image_height", "image_width", "bits_per_pixel", "image_compression_algorithm", "exif_tags" })
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
+@JsonSerialize(as = RasterImageFileExtension.class)
+@JsonDeserialize(builder = RasterImageFileExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"image_height", "image_width", "bits_per_pixel", "image_compression_algorithm", "exif_tags"})
 @JsonTypeName("raster-image-ext")
 @AllowedParents({FileCoo.class})
 @BusinessRule(ifExp = "true", thenExp = "getImageHeight().isPresent() == true || getImageWidth().isPresent() == true || getBitsPerPixel().isPresent() == false || getImageCompressionAlgorithm().isPresent() == true || getExifTags().isEmpty() == true", errorMessage = "At least 1 field must be used in Raster Image File Extension.")
@@ -53,6 +58,6 @@ public interface RasterImageFileExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("exif_tags")
     @JsonPropertyDescription("Specifies the set of EXIF tags found in the image file, as a dictionary. Each key/value pair in the dictionary represents the name/value of a single EXIF tag.")
-    Map<String,Object> getExifTags();
+    Map<String, Object> getExifTags();
 
 }

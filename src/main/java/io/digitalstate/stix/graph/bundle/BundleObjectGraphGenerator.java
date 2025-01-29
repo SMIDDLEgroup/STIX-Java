@@ -19,10 +19,10 @@ public class BundleObjectGraphGenerator implements GraphGenerator {
         return object;
     }
 
-    public Set<GraphElement> process(){
+    public Set<GraphElement> process() {
         Set<GraphElement> items = new HashSet<>();
 
-        object.getObjects().forEach(o->{
+        object.getObjects().forEach(o -> {
             items.addAll(new BundleableObjectGraphGenerator(o).process());
         });
         return items;

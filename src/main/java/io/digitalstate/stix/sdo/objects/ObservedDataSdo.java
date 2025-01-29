@@ -19,17 +19,19 @@ import org.immutables.serial.Serial;
 import org.immutables.value.Value;
 
 import java.util.Set;
+
 /**
  * observed-data
  * <p>
  * Observed data conveys information that was observed on systems and networks, such as log data or network traffic, using the Cyber Observable specification.
- * 
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @JsonTypeName("observed-data")
 @DefaultTypeValue(value = "observed-data", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Sdo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = ObservedData.class) @JsonDeserialize(builder = ObservedData.Builder.class)
+@Value.Style(typeAbstract = "*Sdo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = ObservedData.class)
+@JsonDeserialize(builder = ObservedData.Builder.class)
 @JsonPropertyOrder({"type", "id", "created_by_ref", "created",
         "modified", "revoked", "labels", "external_references",
         "object_marking_refs", "granular_markings", "first_observed", "last_observed",

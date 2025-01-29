@@ -5,17 +5,11 @@ import io.digitalstate.stix.bundle.Bundle
 import io.digitalstate.stix.bundle.BundleableObject
 import io.digitalstate.stix.common.StixBoolean
 import io.digitalstate.stix.common.StixInstant
-import io.digitalstate.stix.coo.extension.types.*
-import io.digitalstate.stix.coo.objects.*
-import io.digitalstate.stix.coo.types.*
 import io.digitalstate.stix.datamarkings.GranularMarking
 import io.digitalstate.stix.datamarkings.MarkingDefinition
 import io.digitalstate.stix.datamarkings.objects.Statement
 import io.digitalstate.stix.datamarkings.objects.Tlp
 import io.digitalstate.stix.sdo.DomainObject
-import io.digitalstate.stix.sdo.objects.*
-import io.digitalstate.stix.sdo.types.*
-import io.digitalstate.stix.sro.objects.*
 import io.digitalstate.stix.vocabulary.vocabularies.*
 import net.andreinc.mockneat.MockNeat
 
@@ -31,7 +25,7 @@ public class StixMockDataGenerator {
 
     Instant commonLowerDate = Instant.ofEpochMilli(LocalDate.of(2000, 1, 1).toEpochDay())
 
-    Instant generateRandomDate(Instant lower, Instant upper){
+    Instant generateRandomDate(Instant lower, Instant upper) {
         return Instant.ofEpochMilli(ThreadLocalRandom.current()
                 .longs(lower.toEpochMilli(), upper.toEpochMilli())
                 .findAny()
@@ -1910,7 +1904,7 @@ public class StixMockDataGenerator {
         return builder.build()
     }
 
-    BundleableObject generateRandomBundleableObject(){
+    BundleableObject generateRandomBundleableObject() {
         switch (mock.ints().range(1, 14).get()) {
             case 1:
                 return mockAttackPattern()
@@ -1964,7 +1958,7 @@ public class StixMockDataGenerator {
         Bundle.Builder builder = Bundle.builder()
 
         mock.ints().range(bundleCountLowerValue, bundleCountUpperValue).get().times {
-           builder.addObject(generateRandomBundleableObject())
+            builder.addObject(generateRandomBundleableObject())
         }
 
         if (mock.bools().probability(50).get()) {

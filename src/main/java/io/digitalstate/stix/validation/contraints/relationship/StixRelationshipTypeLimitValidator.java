@@ -3,10 +3,8 @@ package io.digitalstate.stix.validation.contraints.relationship;
 import io.digitalstate.stix.sdo.DomainObject;
 import io.digitalstate.stix.sro.objects.RelationshipSro;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-import java.util.Arrays;
-import java.util.List;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class StixRelationshipTypeLimitValidator implements ConstraintValidator<RelationshipTypeLimit, RelationshipSro> {
 

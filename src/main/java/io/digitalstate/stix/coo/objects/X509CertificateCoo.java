@@ -28,15 +28,16 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * x509-certificate
  * <p>
  * The X509 Certificate Object represents the properties of an X.509 certificate.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "x509-certificate", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
 @JsonTypeName("x509-certificate")
-@JsonSerialize(as = X509Certificate.class) @JsonDeserialize(builder = X509Certificate.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "type", "extensions", "is_self_signed", "hashes", "version", "serial_number",
+@JsonSerialize(as = X509Certificate.class)
+@JsonDeserialize(builder = X509Certificate.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"type", "extensions", "is_self_signed", "hashes", "version", "serial_number",
         "signature_algorithm", "issuer", "validity_not_before", "validity_not_after",
         "subject", "subject_public_key_algorithm", "subject_public_key_modulus",
         "subject_public_key_exponent", "x509_v3_extensions"

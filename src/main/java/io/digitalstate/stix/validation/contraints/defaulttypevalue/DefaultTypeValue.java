@@ -1,7 +1,7 @@
 package io.digitalstate.stix.validation.contraints.defaulttypevalue;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -21,11 +21,13 @@ import static java.lang.annotation.ElementType.TYPE;
  */
 @Documented
 @Constraint(validatedBy = {StixDefaultTypeValueBundleableValidator.class, StixDefaultTypeValueBundleObjectValidator.class, StixDefaultTypeValueCyberObservableValidator.class, StixDefaultTypeValueCyberObservableExtensionValidator.class})
-@Target( { ANNOTATION_TYPE, TYPE })
+@Target({ANNOTATION_TYPE, TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DefaultTypeValue {
     String message() default "{io.digitalstate.stix.validation.contraints.defaulttypevalue.DefaultTypeValue}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
     String value();

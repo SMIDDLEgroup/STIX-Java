@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -23,17 +27,18 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * <p>
  * The Network Traffic Object represents arbitrary network traffic that
  * originates from a source and is addressed to a destination.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "network-traffic", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = NetworkTraffic.class) @JsonDeserialize(builder = NetworkTraffic.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = NetworkTraffic.class)
+@JsonDeserialize(builder = NetworkTraffic.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 @JsonTypeName("network-traffic")
-@JsonPropertyOrder({ "type", "extensions", "start", "end", "src_ref", "dst_ref", "src_port", "dst_port", "protocols", "src_byte_count",
+@JsonPropertyOrder({"type", "extensions", "start", "end", "src_ref", "dst_ref", "src_port", "dst_port", "protocols", "src_byte_count",
         "dst_byte_count", "src_packets", "dst_packets", "ipfix", "src_payload_ref", "dst_payload_ref",
-        "encapsulates_refs", "encapsulated_by_ref" })
+        "encapsulates_refs", "encapsulated_by_ref"})
 public interface NetworkTrafficCoo extends CyberObservableObject {
 
     @JsonProperty("start")
@@ -64,7 +69,7 @@ public interface NetworkTrafficCoo extends CyberObservableObject {
 
     @JsonProperty("src_port")
     @JsonPropertyDescription("Specifies the source port used in the network traffic, as an integer. The port value MUST be in the range of 0 - 65535.")
-    Optional<@Range(min = 0, max = 65535 ) Integer> getSrcPort();
+    Optional<@Range(min = 0, max = 65535) Integer> getSrcPort();
 
     @JsonProperty("dst_port")
     @JsonPropertyDescription("Specifies the destination port used in the network traffic, as an integer. The port value MUST be in the range of 0 - 65535.")
@@ -103,7 +108,7 @@ public interface NetworkTrafficCoo extends CyberObservableObject {
      */
     @JsonProperty("ipfix")
     @JsonPropertyDescription("Specifies any IP Flow Information Export [IPFIX] data for the traffic, as a dictionary.")
-    Map<String,Object> getIpFix();
+    Map<String, Object> getIpFix();
 
     /*
      * Must be of type artifact

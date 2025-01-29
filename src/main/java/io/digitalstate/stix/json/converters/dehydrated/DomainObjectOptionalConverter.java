@@ -16,28 +16,28 @@ public class DomainObjectOptionalConverter extends StdConverter<String, Optional
 
     @Override
     public Optional<DomainObject> convert(String value) {
-            String[] parsedValue = value.split("--");
+        String[] parsedValue = value.split("--");
 
-            if (parsedValue.length == 2){
-                ObjectMapper mapper = StixParsers.getJsonMapper();
-                ObjectNode node = mapper.createObjectNode();
+        if (parsedValue.length == 2) {
+            ObjectMapper mapper = StixParsers.getJsonMapper();
+            ObjectNode node = mapper.createObjectNode();
 
-                node.put("type", parsedValue[0]);
-                node.put("id", value);
-                node.put("hydrated", false);
+            node.put("type", parsedValue[0]);
+            node.put("id", value);
+            node.put("hydrated", false);
 
 
-                try {
-                    return Optional.ofNullable(mapper.treeToValue(node, DomainObject.class));
-                    //@TODO add more logic
+            try {
+                return Optional.ofNullable(mapper.treeToValue(node, DomainObject.class));
+                //@TODO add more logic
 
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                    throw new IllegalArgumentException("Cannot Parse Json: " + e.getMessage());
-                }
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                throw new IllegalArgumentException("Cannot Parse Json: " + e.getMessage());
+            }
 
-            } else {
-                throw new IllegalArgumentException("Id is not valid format, Cannot Parse Value: " + value);
+        } else {
+            throw new IllegalArgumentException("Id is not valid format, Cannot Parse Value: " + value);
         }
     }
 }

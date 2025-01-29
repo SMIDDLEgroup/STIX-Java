@@ -2,8 +2,8 @@ package io.digitalstate.stix.validation.contraints.defaulttypevalue;
 
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * This is used on any class that implements <strong>CyberObservableObject</strong>.

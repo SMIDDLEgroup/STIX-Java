@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
@@ -25,15 +29,16 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * <p>
  * The Network Socket extension specifies a default extension for capturing
  * network traffic properties associated with network sockets.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "socket-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
-@JsonSerialize(as = NetworkSocketExtension.class) @JsonDeserialize(builder = NetworkSocketExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
+@JsonSerialize(as = NetworkSocketExtension.class)
+@JsonDeserialize(builder = NetworkSocketExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 @JsonPropertyOrder({"address_family", "is_blocking", "is_listening", "protocol_family", "options", "socket_type",
-        "socket_descriptor", "socket_handle" })
+        "socket_descriptor", "socket_handle"})
 @JsonTypeName("socket-ext")
 @AllowedParents({NetworkTrafficCoo.class})
 public interface NetworkSocketExtensionExt extends CyberObservableExtension {
@@ -58,7 +63,7 @@ public interface NetworkSocketExtensionExt extends CyberObservableExtension {
     //@TODO Should this enforce SO_* ?
     @JsonProperty("options")
     @JsonPropertyDescription("Specifies any options (SO_*) that may be used by the socket, as a dictionary.")
-    Map<String,String> getOptions();
+    Map<String, String> getOptions();
 
     @JsonProperty("socket_type")
     @JsonPropertyDescription("Specifies the type of the socket.")

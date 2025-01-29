@@ -15,11 +15,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 public interface StixRevoked {
 
     @JsonProperty("revoked")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("The revoked property indicates whether the object has been revoked.")
     @Value.Default
     @Redactable
-    default StixBoolean getRevoked(){
+    default StixBoolean getRevoked() {
         return new StixBoolean();
     }
 

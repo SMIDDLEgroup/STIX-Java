@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.TreeNode
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
+import faker.StixMockDataGenerator
 import io.digitalstate.stix.bundle.Bundle
 import io.digitalstate.stix.bundle.BundleableObject
 import io.digitalstate.stix.json.StixParsers
@@ -15,7 +16,6 @@ import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
-import faker.StixMockDataGenerator
 
 class BundleSpec extends Specification {
 
@@ -113,8 +113,8 @@ class BundleSpec extends Specification {
         then:
         TreeNode tree = parser.readValueAsTree()
         TreeNode objectsArray = tree.get("objects")
-        if (objectsArray.isArray()){
-            ((ArrayNode)objectsArray).each {o ->
+        if (objectsArray.isArray()) {
+            ((ArrayNode) objectsArray).each { o ->
                 BundleableObject bundleableObject = o.traverse(parser.getCodec())
                         .readValueAs(BundleableObject.class)
 

@@ -42,12 +42,12 @@ class BundleGraphSpec extends Specification {
                 .build()
 
         Sighting sighting1 = Sighting.builder()
-            .firstSeen(new StixInstant())
-            .lastSeen(new StixInstant())
-            .count(1)
-            .sightingOfRef(attackPattern1)
-            .addObservedDataRef(observedData1)
-            .build()
+                .firstSeen(new StixInstant())
+                .lastSeen(new StixInstant())
+                .count(1)
+                .sightingOfRef(attackPattern1)
+                .addObservedDataRef(observedData1)
+                .build()
 
         then: "build bundle"
 

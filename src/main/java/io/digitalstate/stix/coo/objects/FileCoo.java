@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -26,16 +30,17 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * file
  * <p>
  * The File Object represents the properties of a file.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "file", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true, depluralizeDictionary = {"hash:hashes"})
 @JsonTypeName("file")
-@JsonSerialize(as = File.class) @JsonDeserialize(builder = File.Builder.class)
-@JsonPropertyOrder({ "type", "extensions", "hashes", "size", "name", "name_enc", "magic_number_hex", "mime_type", "created", "modified",
-        "accessed", "parent_directory_ref", "is_encrypted", "encryption_algorithm", "decryption_key" , "contains_refs", "content_ref", })
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@JsonSerialize(as = File.class)
+@JsonDeserialize(builder = File.Builder.class)
+@JsonPropertyOrder({"type", "extensions", "hashes", "size", "name", "name_enc", "magic_number_hex", "mime_type", "created", "modified",
+        "accessed", "parent_directory_ref", "is_encrypted", "encryption_algorithm", "decryption_key", "contains_refs", "content_ref",})
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 @BusinessRule(ifExp = "isEncrypted().orElse(false) == false", thenExp = "getEncryptionAlgorithm().isPresent() == false && getDecryptionKey().isPresent() == false", errorMessage = "Encryption Algorithm and Description Key cannot be used if Encrypted equals false.")
 public interface FileCoo extends CyberObservableObject {
 

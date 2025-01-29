@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -23,17 +27,18 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * <p>
  * The Process Object represents common properties of an instance of a computer
  * program as executed on an operating system.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "process", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = Process.class) @JsonDeserialize(builder = Process.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = Process.class)
+@JsonDeserialize(builder = Process.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 @JsonTypeName("process")
-@JsonPropertyOrder({ "type", "extensions", "is_hidden", "pid", "name", "created", "cwd", "arguments", "command_line",
+@JsonPropertyOrder({"type", "extensions", "is_hidden", "pid", "name", "created", "cwd", "arguments", "command_line",
         "environment_variables", "opened_connection_refs", "creator_user_ref", "binary_ref", "parent_ref",
-        "child_refs" })
+        "child_refs"})
 @BusinessRule(ifExp = "true", thenExp = "getExtensions().isEmpty() == false || isHidden().isPresent() == true || getPid().isPresent() == true || getName().isPresent() == true || getCreated().isPresent() == true || getCwd().isPresent() == true || getArguments().isEmpty() == false || getCommandLine().isPresent() == true || getEnvironmentVariables().isEmpty() == false || getOpenedConnectionRefs().isEmpty() == false || getCreatorUserRef().isPresent() == true || getBinaryRef().isPresent() == true || getParentRef().isPresent() == true || getChildRefs().isEmpty() == false", errorMessage = "A Process Object MUST contain at least one property (other than type) from this object (or one of its extensions).")
 public interface ProcessCoo extends CyberObservableObject {
 
@@ -68,7 +73,7 @@ public interface ProcessCoo extends CyberObservableObject {
 
     @JsonProperty("environment_variables")
     @JsonPropertyDescription("Specifies the list of environment variables associated with the process as a dictionary.")
-    Map<String,String> getEnvironmentVariables();
+    Map<String, String> getEnvironmentVariables();
 
     @JsonProperty("opened_connection_refs")
     @JsonPropertyDescription("Specifies the list of network connections opened by the process, as a reference to one or more Network Traffic Objects.")

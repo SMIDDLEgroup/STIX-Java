@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixCustomProperties;
@@ -16,13 +20,14 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 /**
  * Specifies a component of a multi-part email body.
- *
  */
-@Value.Immutable @Serial.Version(1L)
-@Value.Style(typeAbstract="*Obj", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = MimePartType.class) @JsonDeserialize(builder = MimePartType.Builder.class)
+@Value.Immutable
+@Serial.Version(1L)
+@Value.Style(typeAbstract = "*Obj", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = MimePartType.class)
+@JsonDeserialize(builder = MimePartType.Builder.class)
 @JsonPropertyOrder({"body", "body_raw_ref", "content_type", "content_disposition"})
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 @BusinessRule(ifExp = "true", thenExp = "getBody().isPresent() == true || getBodyRawRef().isPresent() == true", errorMessage = "One of body OR body_raw_ref MUST be included.")
 public interface MimePartTypeObj extends GenericValidation, StixCustomProperties, Serializable {
 

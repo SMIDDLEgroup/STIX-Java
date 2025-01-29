@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.common.StixInstant;
@@ -20,16 +24,17 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 /**
  * The Email Message Object represents an instance of an email message.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "email-message", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
 @JsonTypeName("email-message")
-@JsonSerialize(as = EmailMessage.class) @JsonDeserialize(builder = EmailMessage.Builder.class)
-@JsonPropertyOrder({ "type", "extensions", "is_multipart", "date", "content_type", "from_ref", "sender_ref", "to_refs", "cc_refs", "bcc_refs", "subject",
-        "received_lines", "additional_header_fields", "body", "body_multipart", "raw_email_ref" })
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@JsonSerialize(as = EmailMessage.class)
+@JsonDeserialize(builder = EmailMessage.Builder.class)
+@JsonPropertyOrder({"type", "extensions", "is_multipart", "date", "content_type", "from_ref", "sender_ref", "to_refs", "cc_refs", "bcc_refs", "subject",
+        "received_lines", "additional_header_fields", "body", "body_multipart", "raw_email_ref"})
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 @BusinessRule(ifExp = "isMultipart() == true", thenExp = "getBody().isPresent() == false", errorMessage = "Body cannot be used if isMultipart equals true")
 @BusinessRule(ifExp = "isMultipart() == false", thenExp = "getBodyMultipart().isEmpty() == true", errorMessage = "Body_Multipart cannot be used if isMultipart equals false")
 public interface EmailMessageCoo extends CyberObservableObject {

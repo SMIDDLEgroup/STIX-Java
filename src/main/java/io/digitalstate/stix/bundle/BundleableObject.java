@@ -18,10 +18,15 @@ import java.util.Set;
 public interface BundleableObject extends Serializable, Stix {
 
     String getType();
+
     String getId();
+
     Set<MarkingDefinitionDm> getObjectMarkingRefs();
+
     Set<GranularMarkingDm> getGranularMarkings();
+
     boolean getHydrated();
+
     String toJsonString();
 
 }

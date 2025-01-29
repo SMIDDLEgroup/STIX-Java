@@ -1,6 +1,12 @@
 package io.digitalstate.stix.common;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.digitalstate.stix.bundle.BundleableObject;
@@ -13,10 +19,9 @@ import io.digitalstate.stix.redaction.Redactable;
 import io.digitalstate.stix.sdo.objects.IdentitySdo;
 import io.digitalstate.stix.sdo.types.ExternalReferenceType;
 import io.digitalstate.stix.validation.SdoDefaultValidator;
-import io.digitalstate.stix.validation.groups.ValidateIdOnly;
 import org.immutables.value.Value;
 
-import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolationException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,11 +37,12 @@ public interface StixCommonProperties extends StixSpecVersion, SdoDefaultValidat
      * Dictates if the object is hydrated.
      * Hydration is defined as if the Object has only a "ID" or has been properly
      * hydrated with the expected required fields
+     *
      * @return boolean
      */
     @Value.Default
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    default boolean getHydrated(){
+    default boolean getHydrated() {
         return true;
     }
 
@@ -48,10 +54,11 @@ public interface StixCommonProperties extends StixSpecVersion, SdoDefaultValidat
     @JsonPropertyDescription("Represents identifiers across the CTI specifications. The format consists of the name of the top-level object being identified, followed by two dashes (--), followed by a UUIDv4.")
     String getId();
 
-    @JsonProperty("created_by_ref") @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+    @JsonProperty("created_by_ref")
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("Represents identifiers across the CTI specifications. The format consists of the name of the top-level object being identified, followed by two dashes (--), followed by a UUIDv4.")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonDeserialize(converter = DomainObjectOptionalConverter.class)
     @Redactable(useMask = true, redactionMask = "identity--__REDACTED__")
     Optional<IdentitySdo> getCreatedByRef();
@@ -60,24 +67,27 @@ public interface StixCommonProperties extends StixSpecVersion, SdoDefaultValidat
     @JsonPropertyDescription("The created property represents the time at which the first version of this object was created. The timstamp value MUST be precise to the nearest millisecond.")
     @Value.Default
     @Redactable(useMask = true)
-    default StixInstant getCreated(){
+    default StixInstant getCreated() {
         return new StixInstant();
     }
 
-    @JsonProperty("external_references") @JsonInclude(NON_EMPTY)
+    @JsonProperty("external_references")
+    @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("A list of external references which refers to non-STIX information.")
     @Redactable
     Set<ExternalReferenceType> getExternalReferences();
 
-    @JsonProperty("object_marking_refs") @JsonInclude(NON_EMPTY)
+    @JsonProperty("object_marking_refs")
+    @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The list of marking-definition objects to be applied to this object.")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JsonDeserialize(converter = MarkingDefinitionSetConverter.class)
     @Redactable
     Set<MarkingDefinitionDm> getObjectMarkingRefs();
 
-    @JsonProperty("granular_markings") @JsonInclude(NON_EMPTY)
+    @JsonProperty("granular_markings")
+    @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The set of granular markings that apply to this object.")
     @Redactable
     Set<GranularMarkingDm> getGranularMarkings();
@@ -97,7 +107,7 @@ public interface StixCommonProperties extends StixSpecVersion, SdoDefaultValidat
 
     @Value.Check
     default void checkHydrationValidation() throws ConstraintViolationException {
-        if (getHydrated()){
+        if (getHydrated()) {
             this.validate();
         } else {
             this.validateOnlyId();

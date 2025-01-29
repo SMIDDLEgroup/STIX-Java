@@ -9,6 +9,7 @@ public interface CyberObservableExtensionCommonProperties {
 
     /**
      * This property is used for generation of the dictionary during serialization, and used as the "Type" mapping value for polymorphic when deserializing.
+     *
      * @return
      */
     @JsonIgnore

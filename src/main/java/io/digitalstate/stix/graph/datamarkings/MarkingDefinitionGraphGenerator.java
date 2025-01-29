@@ -8,7 +8,7 @@ import io.digitalstate.stix.graph.elements.Node;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MarkingDefinitionGraphGenerator implements GraphGenerator{
+public class MarkingDefinitionGraphGenerator implements GraphGenerator {
 
     private MarkingDefinitionDm object;
 
@@ -20,7 +20,7 @@ public class MarkingDefinitionGraphGenerator implements GraphGenerator{
         return object;
     }
 
-    public Set<GraphElement> process(){
+    public Set<GraphElement> process() {
         Set<GraphElement> elements = new HashSet<>();
 
         elements.add(generateNode());
@@ -29,7 +29,7 @@ public class MarkingDefinitionGraphGenerator implements GraphGenerator{
         return elements;
     }
 
-    private Node generateNode(){
+    private Node generateNode() {
         return new Node(object.getId(), object.getType(), null, object);
     }
 

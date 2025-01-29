@@ -30,7 +30,7 @@ public class CyberObservableGraphGenerator implements GraphGenerator {
         return observedDataObjectId;
     }
 
-    public Set<GraphElement> process(){
+    public Set<GraphElement> process() {
         Set<GraphElement> elements = new HashSet<>();
         elements.add(generateNode());
 
@@ -38,7 +38,7 @@ public class CyberObservableGraphGenerator implements GraphGenerator {
     }
 
     // Is public to support custom usage by Observed Data Graph Generator
-    public Node generateNode(){
+    public Node generateNode() {
         String uuid = object.getObservableObjectKey() + "--" + UUID.randomUUID().toString();
         String type = "coo-" + object.getType();
 

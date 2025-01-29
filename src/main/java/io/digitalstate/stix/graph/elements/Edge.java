@@ -2,7 +2,7 @@ package io.digitalstate.stix.graph.elements;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class Edge implements GraphElement {
 

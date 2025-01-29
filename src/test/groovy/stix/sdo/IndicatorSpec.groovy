@@ -2,6 +2,7 @@ package stix.sdo
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import faker.StixMockDataGenerator
 import io.digitalstate.stix.json.StixParsers
 import io.digitalstate.stix.sdo.objects.Indicator
 import org.skyscreamer.jsonassert.JSONAssert
@@ -9,27 +10,28 @@ import org.skyscreamer.jsonassert.JSONCompareMode
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
-import faker.StixMockDataGenerator
 
 class IndicatorSpec extends Specification {
 
-    @Shared ObjectMapper mapper = new ObjectMapper()
-    @Shared StixMockDataGenerator stixMockDataGenerator = new StixMockDataGenerator()
+    @Shared
+    ObjectMapper mapper = new ObjectMapper()
+    @Shared
+    StixMockDataGenerator stixMockDataGenerator = new StixMockDataGenerator()
 
     @Unroll
     def "Generate Indicator Data: Run: '#i'"() {
         when: "Generating Indicator Data"
-            Indicator originalIndicator = stixMockDataGenerator.mockIndicator()
+        Indicator originalIndicator = stixMockDataGenerator.mockIndicator()
 //            println "Original Object: ${originalIndicator.toString()}"
 
         then: "Convert Indicator to Json"
-            JsonNode originalJson = mapper.readTree(originalIndicator.toJsonString())
-            String originalJsonString = mapper.writeValueAsString(originalJson)
+        JsonNode originalJson = mapper.readTree(originalIndicator.toJsonString())
+        String originalJsonString = mapper.writeValueAsString(originalJson)
 //            println "Original Json: ${originalJsonString}"
 
         then: "Parse Json back into Indicator Object"
-            Indicator parsedIndicator = (Indicator)StixParsers.parseObject(originalJsonString)
-            Indicator parsedIndicatorGeneric = StixParsers.parse(originalJsonString, Indicator.class)
+        Indicator parsedIndicator = (Indicator) StixParsers.parseObject(originalJsonString)
+        Indicator parsedIndicatorGeneric = StixParsers.parse(originalJsonString, Indicator.class)
 //            println "Parsed Object: ${parsedIndicator}"
 
         //@TODO needs to be setup to handle dehydrated object comparison
@@ -37,14 +39,14 @@ class IndicatorSpec extends Specification {
 //            assert originalAttackPattern == parsedAttackPattern
 
         then: "Convert Parsed Indicator back to into Json"
-            JsonNode newJson =  mapper.readTree(parsedIndicator.toJsonString())
-            String newJsonString = mapper.writeValueAsString(newJson)
+        JsonNode newJson = mapper.readTree(parsedIndicator.toJsonString())
+        String newJsonString = mapper.writeValueAsString(newJson)
 //            println "New Json: ${newJsonString}"
 
         then: "New Json should match Original Json"
-            JSONAssert.assertEquals(originalJsonString, newJsonString, JSONCompareMode.NON_EXTENSIBLE)
+        JSONAssert.assertEquals(originalJsonString, newJsonString, JSONCompareMode.NON_EXTENSIBLE)
 
         where:
-            i << (1..100)
+        i << (1..100)
     }
 }

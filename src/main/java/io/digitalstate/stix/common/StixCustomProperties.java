@@ -15,10 +15,12 @@ public interface StixCustomProperties {
      * Custom Properties for STIX Objects.
      * Any object that supports custom properties will have a validation of the custom property prefix (typically "x_").
      * If the additional property in the JSON does not meet the StartsWith condition, then the JSON will be rejected.
+     *
      * @return Map of custom properties {@code Map<String, Object>}
      */
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonUnwrapped @JsonAnyGetter
+    @JsonUnwrapped
+    @JsonAnyGetter
     Map<String, Object> getCustomProperties();
 
 }

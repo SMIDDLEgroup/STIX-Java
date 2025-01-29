@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.CyberObservableObject;
@@ -17,15 +21,16 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
  * autonomous-system
  * <p>
  * The AS object represents the properties of an Autonomous Systems (AS).
- * 
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "autonomous-system", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Coo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@Value.Style(typeAbstract = "*Coo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
 @JsonTypeName("autonomous-system")
-@JsonSerialize(as = AutonomousSystem.class) @JsonDeserialize(builder = AutonomousSystem.Builder.class)
+@JsonSerialize(as = AutonomousSystem.class)
+@JsonDeserialize(builder = AutonomousSystem.Builder.class)
 @JsonPropertyOrder({"type", "extensions", "number", "name", "rir"})
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
 public interface AutonomousSystemCoo extends CyberObservableObject {
 
     @JsonProperty("number")

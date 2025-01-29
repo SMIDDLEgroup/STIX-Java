@@ -3,7 +3,10 @@ package io.digitalstate.stix.custom;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.digitalstate.stix.common.*;
+import io.digitalstate.stix.common.StixCommonProperties;
+import io.digitalstate.stix.common.StixLabels;
+import io.digitalstate.stix.common.StixModified;
+import io.digitalstate.stix.common.StixRevoked;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Map;
@@ -16,7 +19,7 @@ public interface StixCustomObject extends
         StixCommonProperties,
         StixLabels,
         StixModified,
-        StixRevoked{
+        StixRevoked {
 
     @Override
     String getType();
@@ -26,7 +29,8 @@ public interface StixCustomObject extends
 
     //@TODO Future enhancement to create a custom deserializer that will support the difference between x_ props and the CustomObjectProperties()
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonUnwrapped @JsonAnyGetter
+    @JsonUnwrapped
+    @JsonAnyGetter
     Map<@Length(min = 3,
             max = 250,
             message = "STIX Custom Properties must have a min key length of 3 and max of 250")

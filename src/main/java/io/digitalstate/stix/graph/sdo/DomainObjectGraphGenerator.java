@@ -21,8 +21,8 @@ public class DomainObjectGraphGenerator implements GraphGenerator {
     public Set<GraphElement> process() {
         Set<GraphElement> elements = new HashSet<>();
 
-        if (ObservedDataSdo.class.isAssignableFrom(object.getClass())){
-            elements.addAll(generateObservedDataGraphElements((ObservedDataSdo)object));
+        if (ObservedDataSdo.class.isAssignableFrom(object.getClass())) {
+            elements.addAll(generateObservedDataGraphElements((ObservedDataSdo) object));
         } else {
             //@TODO Add various support for the other SDOs
             elements.add(generateNode());
@@ -39,7 +39,7 @@ public class DomainObjectGraphGenerator implements GraphGenerator {
         return new Node(object.getId(), object.getType(), null, object);
     }
 
-    private Set<GraphElement> generateObservedDataGraphElements(ObservedDataSdo observedDataSdo){
+    private Set<GraphElement> generateObservedDataGraphElements(ObservedDataSdo observedDataSdo) {
         return new ObservedDataGraphGenerator(observedDataSdo).process();
     }
 

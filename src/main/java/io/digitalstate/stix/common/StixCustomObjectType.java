@@ -6,7 +6,6 @@ import io.digitalstate.stix.validation.contraints.startswith.StartsWith;
 import org.immutables.value.Value;
 
 
-
 /**
  *
  */

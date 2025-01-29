@@ -23,14 +23,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 /**
  * attack-pattern
  * <p>
- * Attack Patterns are a type of TTP that describe ways that adversaries attempt to compromise targets. 
- * 
+ * Attack Patterns are a type of TTP that describe ways that adversaries attempt to compromise targets.
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "attack-pattern", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Sdo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@Value.Style(typeAbstract = "*Sdo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
 @JsonTypeName("attack-pattern")
-@JsonSerialize(as = AttackPattern.class) @JsonDeserialize(builder = AttackPattern.Builder.class)
+@JsonSerialize(as = AttackPattern.class)
+@JsonDeserialize(builder = AttackPattern.Builder.class)
 @JsonPropertyOrder({"type", "id", "created_by_ref", "created",
         "modified", "revoked", "labels", "external_references",
         "object_marking_refs", "granular_markings",
@@ -44,13 +45,13 @@ public interface AttackPatternSdo extends DomainObject {
     String getName();
 
     @JsonProperty("description")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("A description that provides more details and context about the Attack Pattern, potentially including its purpose and its key characteristics.")
     @Redactable
     Optional<String> getDescription();
 
     @JsonProperty("kill_chain_phases")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("The list of kill chain phases for which this attack pattern is used.")
     @Redactable
     Set<KillChainPhaseType> getKillChainPhases();

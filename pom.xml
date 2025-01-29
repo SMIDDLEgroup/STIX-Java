@@ -5,7 +5,7 @@
 
     <groupId>io.digitalstate.stix</groupId>
     <artifactId>stix</artifactId>
-    <version>v0.10.0-NO-VALIDATION</version>
+    <version>v0.11.0-NO-VALIDATION</version>
     <packaging>jar</packaging>
 
     <name>STIX 2</name>
@@ -17,7 +17,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
-        <jackson.verion>2.9.9</jackson.verion>
+        <jackson.verion>2.17.3</jackson.verion>
     </properties>
 
     <repositories>
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.0.13.Final</version>
+            <version>8.0.2.Final</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

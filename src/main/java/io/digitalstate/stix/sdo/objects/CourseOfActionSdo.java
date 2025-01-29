@@ -22,14 +22,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 /**
  * course-of-action
  * <p>
- * A Course of Action is an action taken either to prevent an attack or to respond to an attack that is in progress. 
- * 
+ * A Course of Action is an action taken either to prevent an attack or to respond to an attack that is in progress.
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @JsonTypeName("course-of-action")
 @DefaultTypeValue(value = "course-of-action", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Sdo", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
-@JsonSerialize(as = CourseOfAction.class) @JsonDeserialize(builder = CourseOfAction.Builder.class)
+@Value.Style(typeAbstract = "*Sdo", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, depluralize = true)
+@JsonSerialize(as = CourseOfAction.class)
+@JsonDeserialize(builder = CourseOfAction.Builder.class)
 @JsonPropertyOrder({"type", "id", "created_by_ref", "created",
         "modified", "revoked", "labels", "external_references",
         "object_marking_refs", "granular_markings", "name",
@@ -43,13 +44,13 @@ public interface CourseOfActionSdo extends DomainObject {
     String getName();
 
     @JsonProperty("description")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("A description that provides more details and context about the Course of Action, potentially including its purpose and its key characteristics.")
     @Redactable
     Optional<String> getDescription();
 
     @JsonProperty("action")
-    @JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
+    @JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
     @JsonPropertyDescription("RESERVED – To capture structured/automated courses of action.")
     @Redactable(useMask = true)
     Set<String> getAction();

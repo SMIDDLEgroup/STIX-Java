@@ -24,7 +24,7 @@ public class SightingSroGraphGenerator implements GraphGenerator {
         return object;
     }
 
-    public Set<GraphElement> process(){
+    public Set<GraphElement> process() {
         Set<GraphElement> elements = new HashSet<>();
 
         elements.add(generateNode());
@@ -33,7 +33,7 @@ public class SightingSroGraphGenerator implements GraphGenerator {
         return elements;
     }
 
-    private Node generateNode(){
+    private Node generateNode() {
         return new Node(object.getId(), object.getType(), null, object);
     }
 
@@ -47,12 +47,12 @@ public class SightingSroGraphGenerator implements GraphGenerator {
         return edges;
     }
 
-    private Edge generateSightingOfRefEdge(DomainObject sightingOfRefDomainObject){
+    private Edge generateSightingOfRefEdge(DomainObject sightingOfRefDomainObject) {
         String uuidPrefix = "ref";
 
         DomainObject sor = object.getSightingOfRef();
 
-        String sorUuid =  uuidPrefix + "-" + UUID.randomUUID().toString();
+        String sorUuid = uuidPrefix + "-" + UUID.randomUUID().toString();
 
         Edge edge = new Edge(sorUuid, uuidPrefix, object.getId(), sor.getId(), null);
 
@@ -63,12 +63,12 @@ public class SightingSroGraphGenerator implements GraphGenerator {
         return edge;
     }
 
-    private Set<Edge> generateObservedDataEdges(String sourceId, Set<ObservedDataSdo> observedDataSdoSet){
+    private Set<Edge> generateObservedDataEdges(String sourceId, Set<ObservedDataSdo> observedDataSdoSet) {
         Set<Edge> edges = new HashSet<>();
 
         observedDataSdoSet.forEach(od -> {
             String uuidPrefix = "ref";
-            String odUuid =  uuidPrefix + "-" + UUID.randomUUID().toString();
+            String odUuid = uuidPrefix + "-" + UUID.randomUUID().toString();
 
             Edge edge = new Edge(odUuid, uuidPrefix, sourceId, od.getId(), null);
 

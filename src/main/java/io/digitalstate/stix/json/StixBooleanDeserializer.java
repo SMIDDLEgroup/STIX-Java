@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class StixBooleanDeserializer extends StdDeserializer<StixBoolean> {
 
-    public StixBooleanDeserializer(){
+    public StixBooleanDeserializer() {
         this(null);
     }
 

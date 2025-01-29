@@ -1,7 +1,7 @@
 package io.digitalstate.stix.validation.contraints.coo.validateextensions;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,10 +17,12 @@ import static java.lang.annotation.ElementType.TYPE;
  */
 @Documented
 @Constraint(validatedBy = {StixValidateParentCooValidator.class})
-@Target( { ANNOTATION_TYPE, TYPE })
+@Target({ANNOTATION_TYPE, TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidateReferences {
     String message() default "{io.digitalstate.stix.validation.contraints.coo.allowedparents.ValidateReferences}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

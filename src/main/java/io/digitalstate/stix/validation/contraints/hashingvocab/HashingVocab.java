@@ -2,8 +2,8 @@ package io.digitalstate.stix.validation.contraints.hashingvocab;
 
 import io.digitalstate.stix.vocabulary.StixVocabulary;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -19,13 +19,15 @@ import static java.lang.annotation.ElementType.TYPE_USE;
  */
 @Documented
 @Constraint(validatedBy = {StixHashingVocabValidatorString.class})
-@Target( { ANNOTATION_TYPE, TYPE_USE })
+@Target({ANNOTATION_TYPE, TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface HashingVocab {
     String message() default "{io.digitalstate.stix.validation.contraints.hashingvocab}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
-    Class<? extends StixVocabulary>  value();
+    Class<? extends StixVocabulary> value();
 
 }

@@ -1,6 +1,10 @@
 package io.digitalstate.stix.coo.extension.types;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
@@ -16,17 +20,19 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+
 /**
  * The PDF file extension specifies a default extension for capturing properties
  * specific to PDF files.
- *
  */
-@Value.Immutable @Serial.Version(1L)
+@Value.Immutable
+@Serial.Version(1L)
 @DefaultTypeValue(value = "pdf-ext", groups = {DefaultValuesProcessor.class})
-@Value.Style(typeAbstract="*Ext", typeImmutable="*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
-@JsonSerialize(as = PdfFileExtension.class) @JsonDeserialize(builder = PdfFileExtension.Builder.class)
-@JsonInclude(value = NON_EMPTY, content= NON_EMPTY)
-@JsonPropertyOrder({ "version", "is_optimized", "document_info_dict", "pdfid0", "pdfid1" })
+@Value.Style(typeAbstract = "*Ext", typeImmutable = "*", validationMethod = Value.Style.ValidationMethod.NONE, additionalJsonAnnotations = {JsonTypeName.class}, passAnnotations = {AllowedParents.class}, depluralize = true)
+@JsonSerialize(as = PdfFileExtension.class)
+@JsonDeserialize(builder = PdfFileExtension.Builder.class)
+@JsonInclude(value = NON_EMPTY, content = NON_EMPTY)
+@JsonPropertyOrder({"version", "is_optimized", "document_info_dict", "pdfid0", "pdfid1"})
 @JsonTypeName("pdf-ext")
 @AllowedParents({FileCoo.class})
 //@TODO review creating a simple method that will do a "at least 1 field is used" so it can be used within the annotation rather than managing duplicate of all field names:
@@ -43,7 +49,7 @@ public interface PdfFileExtensionExt extends CyberObservableExtension {
 
     @JsonProperty("document_info_dict")
     @JsonPropertyDescription("Specifies details of the PDF document information dictionary (DID), which includes properties like the document creation data and producer, as a dictionary.")
-    Map<String,String> getDocumentInfoDict();
+    Map<String, String> getDocumentInfoDict();
 
     @JsonProperty("pdfid0")
     @JsonPropertyDescription("Specifies the first file identifier found for the PDF file.")

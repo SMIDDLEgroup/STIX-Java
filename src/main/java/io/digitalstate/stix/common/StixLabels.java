@@ -17,9 +17,10 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 @Value.Style(validationMethod = Value.Style.ValidationMethod.NONE)
 public interface StixLabels {
 
-    @JsonProperty("labels") @JsonInclude(NON_EMPTY)
+    @JsonProperty("labels")
+    @JsonInclude(NON_EMPTY)
     @JsonPropertyDescription("The labels property specifies a set of classifications.")
     @Redactable
-    Set<@Length(min = 1) String> getLabels();
+    Set<@Length(min = 1) String> getLabels();@Leng
 
 }

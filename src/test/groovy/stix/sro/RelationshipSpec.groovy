@@ -2,6 +2,7 @@ package stix.sro
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import faker.StixMockDataGenerator
 import io.digitalstate.stix.json.StixParsers
 import io.digitalstate.stix.sro.objects.Relationship
 import org.skyscreamer.jsonassert.JSONAssert
@@ -9,12 +10,13 @@ import org.skyscreamer.jsonassert.JSONCompareMode
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
-import faker.StixMockDataGenerator
 
 class RelationshipSpec extends Specification {
 
-    @Shared ObjectMapper mapper = new ObjectMapper()
-    @Shared StixMockDataGenerator stixMockDataGenerator = new StixMockDataGenerator()
+    @Shared
+    ObjectMapper mapper = new ObjectMapper()
+    @Shared
+    StixMockDataGenerator stixMockDataGenerator = new StixMockDataGenerator()
 
     @Unroll
     def "Generate Relationship SRO Data: Run: '#i'"() {
@@ -23,13 +25,13 @@ class RelationshipSpec extends Specification {
 //            println "Original Object: ${originalRelationship.toString()}"
 
         then: "Convert Relationship to Json"
-            JsonNode originalJson = mapper.readTree(originalRelationship.toJsonString())
-            String originalJsonString = mapper.writeValueAsString(originalJson)
+        JsonNode originalJson = mapper.readTree(originalRelationship.toJsonString())
+        String originalJsonString = mapper.writeValueAsString(originalJson)
 //            println "Original Json: ${originalJsonString}"
 
         then: "Parse Json back into Relationship Object"
-            Relationship parsedRelationship = (Relationship)StixParsers.parseObject(originalJsonString)
-            Relationship parsedRelationshipGeneric = StixParsers.parse(originalJsonString, Relationship.class)
+        Relationship parsedRelationship = (Relationship) StixParsers.parseObject(originalJsonString)
+        Relationship parsedRelationshipGeneric = StixParsers.parse(originalJsonString, Relationship.class)
 //            println "Parsed Object: ${parsedRelationship}"
 
         //@TODO needs to be setup to handle dehydrated object comparison
@@ -37,14 +39,14 @@ class RelationshipSpec extends Specification {
 //            assert originalRelationship == parsedMarkingDefinition
 
         then: "Convert Parsed Relationship Object back to into Json"
-            JsonNode newJson =  mapper.readTree(parsedRelationship.toJsonString())
-            String newJsonString = mapper.writeValueAsString(newJson)
+        JsonNode newJson = mapper.readTree(parsedRelationship.toJsonString())
+        String newJsonString = mapper.writeValueAsString(newJson)
 //            println "New Json: ${newJsonString}"
 
         then: "New Json should match Original Json"
-            JSONAssert.assertEquals(originalJsonString, newJsonString, JSONCompareMode.NON_EXTENSIBLE)
+        JSONAssert.assertEquals(originalJsonString, newJsonString, JSONCompareMode.NON_EXTENSIBLE)
 
         where:
-            i << (1..100)
+        i << (1..100)
     }
 }

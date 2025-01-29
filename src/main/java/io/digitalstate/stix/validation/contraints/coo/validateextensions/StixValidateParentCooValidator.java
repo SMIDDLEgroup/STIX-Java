@@ -4,8 +4,8 @@ import io.digitalstate.stix.coo.CyberObservableObject;
 import io.digitalstate.stix.coo.extension.CyberObservableExtension;
 import io.digitalstate.stix.validation.contraints.coo.allowedparents.AllowedParents;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -23,10 +23,10 @@ public class StixValidateParentCooValidator implements ConstraintValidator<Valid
                     Class<? extends CyberObservableObject>[] values = annotation.get().value();
 
                     if (values.length >= 1) {
-                        boolean hasAllowedParent = Arrays.stream(values).anyMatch(i->
+                        boolean hasAllowedParent = Arrays.stream(values).anyMatch(i ->
                                 i.isAssignableFrom(cyberObservableObject.getClass()));
 
-                        if (hasAllowedParent){
+                        if (hasAllowedParent) {
 //                            System.out.println("Class is assignable from Allowed-Parents interface list");
                             return true;
                         } else {
